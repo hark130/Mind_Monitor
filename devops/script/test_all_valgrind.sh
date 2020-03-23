@@ -8,10 +8,10 @@
 # EXAMPLE: test_all_valgrind.sh good 1 3  # Runs valgrind on good_code{1-3}.bin
 # NOTES:
 #   Executes in the following order:
-#       make all_[name]; valgrind [name]_code{1-3}.bin
+#       make all_[name]; valgrind dist/[name]_code{1-3}.bin
 #   Executes valgrind with:
 #       valgrind -q --leak-check=full --track-origins=yes --tool=memcheck \
-#       --error-exitcode=1 [name]_code{start-stop}.bin 2>&1 /dev/null
+#       --error-exitcode=1 dist/[name]_code{start-stop}.bin 2>&1 /dev/null
 #   Validates all input
 
 PARAM_NAME=$1
