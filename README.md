@@ -9,3 +9,9 @@ A comparison of various C Programming memory debuggers
 * Memwatch
 * Mtrace
 
+## RESULTS
+
+| Filename    | Description     | Dmalloc    | Electric Fence  | Memcheck   | Memwatch   | Mtrace     |
+| :---------- | :-------------- | :--------: | :-------------: | :--------: | :--------: | :--------: |
+| bad_code1.c | Uninit. mem     | :question: | :question:      | :+1:       | :question: | :question: |
+| bad_code2.c | Buffer overflow | :question: | :question:      | :+1:       | :question: | :question: |
