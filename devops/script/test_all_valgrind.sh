@@ -23,6 +23,7 @@ FILE_PREFIX=$PARAM_NAME"_code"
 FILE_EXT=".bin"
 SUCCESS_PREFIX="Success: "
 FAILURE_PREFIX="FAILURE! "
+ERRORS_PREFIX="ERRORS! "
 
 # Purpose - Tests parameter 1 for length 0
 # Return - 1 if empty, 0 if not
@@ -112,7 +113,7 @@ do
         $FILE_PREFIX$i$FILE_EXT
     else
         echo ""
-        echo $FAILURE_PREFIX"Valgrind has found an error in"\
+        echo $ERRORS_PREFIX"Valgrind has found an error in"\
         $FILE_PREFIX$i$FILE_EXT >&2
         echo "Replicate these results with the following command:"
         echo "valgrind -v --leak-check=full --track-origins=yes"\
