@@ -99,6 +99,36 @@ good6:
 bad6:
 	$(CC) -o $(DIST)bad_code6.bin $(CODE)bad_code6.c
 
+good7:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code7.o -c $(CODE)good_code7.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code7.bin $(DIST)gimme_mem.o $(DIST)good_code7.o
+
+bad7:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code7.o -c $(CODE)bad_code7.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code7.bin $(DIST)gimme_mem.o $(DIST)bad_code7.o
+
+good8:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code8.o -c $(CODE)good_code8.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code8.bin $(DIST)gimme_mem.o $(DIST)good_code8.o
+
+bad8:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code8.o -c $(CODE)bad_code8.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code8.bin $(DIST)gimme_mem.o $(DIST)bad_code8.o
+
+good9:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code9.o -c $(CODE)good_code9.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code9.bin $(DIST)gimme_mem.o $(DIST)good_code9.o
+
+bad9:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code9.o -c $(CODE)bad_code9.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code9.bin $(DIST)gimme_mem.o $(DIST)bad_code9.o
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
@@ -106,6 +136,9 @@ all_good:
 	$(MAKE) good4
 	$(MAKE) good5
 	$(MAKE) good6
+	$(MAKE) good7
+	$(MAKE) good8
+	$(MAKE) good9
 
 all_bad:
 	$(MAKE) bad1
@@ -114,6 +147,9 @@ all_bad:
 	$(MAKE) bad4
 	$(MAKE) bad5
 	$(MAKE) bad6
+	$(MAKE) bad7
+	$(MAKE) bad8
+	$(MAKE) bad9
 
 all:
 	$(MAKE) clean
