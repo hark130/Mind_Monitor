@@ -18,7 +18,7 @@ A comparison of various C Programming memory debuggers
 | bad_code3.c | Memory leak        | :question: | :question:      | :+1:       | :question: | :question: |
 | bad_code4.c | Invalid mem access | :question: | :question:      | :+1:       | :question: | :question: |
 | bad_code5.c | Double free        | :question: | :question:      | :+1:       | :question: | :question: |
-| bad_code6.c | Uninit. integer    | :question: | :question:      |            | :question: | :question: |
+| bad_code6.c | Uninit. integer    | :question: | :question:      | :+1:       | :question: | :question: |
 
 
 NOTE:  Future ideas from https://valgrind.org/docs/manual/mc-manual.html
