@@ -28,5 +28,6 @@ int main(void)
     free(bufLeak);
 
     // DONE
+    teardown_mimo();
     return 0;
 }
