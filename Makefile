@@ -83,17 +83,29 @@ bad4:
 	$(CC) $(CFLAGS) -o $(DIST)bad_code4.o -c $(CODE)bad_code4.c
 	$(CC) $(CFLAGS) -o $(DIST)bad_code4.bin $(DIST)gimme_mem.o $(DIST)bad_code4.o
 
+good5:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code5.o -c $(CODE)good_code5.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code5.bin $(DIST)gimme_mem.o $(DIST)good_code5.o
+
+bad5:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code5.o -c $(CODE)bad_code5.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code5.bin $(DIST)gimme_mem.o $(DIST)bad_code5.o
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
 	$(MAKE) good3
 	$(MAKE) good4
+	$(MAKE) good5
 
 all_bad:
 	$(MAKE) bad1
 	$(MAKE) bad2
 	$(MAKE) bad3
 	$(MAKE) bad4
+	$(MAKE) bad5
 
 all:
 	$(MAKE) clean
