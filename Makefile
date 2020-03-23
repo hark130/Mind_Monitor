@@ -93,12 +93,19 @@ bad5:
 	$(CC) $(CFLAGS) -o $(DIST)bad_code5.o -c $(CODE)bad_code5.c
 	$(CC) $(CFLAGS) -o $(DIST)bad_code5.bin $(DIST)gimme_mem.o $(DIST)bad_code5.o
 
+good6:
+	$(CC) -o $(DIST)good_code6.bin $(CODE)good_code6.c
+
+bad6:
+	$(CC) -o $(DIST)bad_code6.bin $(CODE)bad_code6.c
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
 	$(MAKE) good3
 	$(MAKE) good4
 	$(MAKE) good5
+	$(MAKE) good6
 
 all_bad:
 	$(MAKE) bad1
@@ -106,6 +113,7 @@ all_bad:
 	$(MAKE) bad3
 	$(MAKE) bad4
 	$(MAKE) bad5
+	$(MAKE) bad6
 
 all:
 	$(MAKE) clean
