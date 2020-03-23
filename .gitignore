@@ -1,6 +1,7 @@
 # Directories
 # Ignore the entire distribution directory
 dist/
+devops/logs/
 
 # Prerequisites
 *.d
