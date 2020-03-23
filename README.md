@@ -21,7 +21,7 @@ A comparison of various C Programming memory debuggers
 | bad_code6.c | Uninit. integer     | :question: | :question:      | :+1:       | :question: | :question: |
 | bad_code7.c | Overlapping memcpy  | :question: | :question:      | :-1:       | :question: | :question: |
 | bad_code8.c | Fishy malloc values | :question: | :question:      | :+1:       | :question: | :question: |
-| bad_code8.c | Fishy calloc values | :question: | :question:      | :+1:       | :question: | :question: |
+| bad_code9.c | Fishy calloc values | :question: | :question:      | :+1:       | :question: | :question: |
 
 
 NOTE:  Some ideas came from https://valgrind.org/docs/manual/mc-manual.html
