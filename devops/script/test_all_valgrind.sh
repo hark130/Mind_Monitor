@@ -42,27 +42,27 @@ validate_input_not_empty()
 validate_input_not_empty $PARAM_NAME
 if [ $? -ne 0 ]
 then
-    echo $FAILURE_PREFIX"The 'name' parameter is invalid"
+    echo -e "\n"$FAILURE_PREFIX"The 'name' parameter is invalid\n"
     exit 1
 fi
 # PARAM_START
 validate_input_not_empty $PARAM_START
 if [ $? -ne 0 ]
 then
-    echo $FAILURE_PREFIX"The 'start' parameter is invalid"
+    echo -e "\n"FAILURE_PREFIX"The 'start' parameter is invalid\n"
     exit 1
 fi
 # PARAM_STOP
 validate_input_not_empty $PARAM_STOP
 if [ $? -ne 0 ]
 then
-    echo $FAILURE_PREFIX"The 'stop' parameter is invalid"
+    echo -e "\n"$FAILURE_PREFIX"The 'stop' parameter is invalid\n"
     exit 1
 fi
 # Range
 if [ $PARAM_START -gt $PARAM_STOP ]
 then
-    echo $FAILURE_PREFIX"The 'start' can not be greater than the 'stop'"
+    echo -e "\n"$FAILURE_PREFIX"The 'start' can not be greater than the 'stop'\n"
     exit 1
 fi
 
