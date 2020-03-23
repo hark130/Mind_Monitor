@@ -9,7 +9,7 @@
 int main(void)
 {
     /***********************************************************/
-    /* 1. Uninitialised value was created by a heap allocation */
+    /* 1. Utilizing unitialized memory                         */
     /***********************************************************/
     // LOCAL VARIABLES
     char *bufUninit = (char *)gimme_mem_malloc((BUF_SIZE * sizeof(char)) + 1);
