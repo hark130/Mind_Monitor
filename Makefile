@@ -73,15 +73,27 @@ bad3:
 # 	echo "\nVALGRIND BAD\n"
 # 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck --error-exitcode=1 $(DIST)bad_code3.bin
 
+good4:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code4.o -c $(CODE)good_code4.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code4.bin $(DIST)gimme_mem.o $(DIST)good_code4.o
+
+bad4:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code4.o -c $(CODE)bad_code4.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code4.bin $(DIST)gimme_mem.o $(DIST)bad_code4.o
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
 	$(MAKE) good3
+	$(MAKE) good4
 
 all_bad:
 	$(MAKE) bad1
 	$(MAKE) bad2
 	$(MAKE) bad3
+	$(MAKE) bad4
 
 all:
 	$(MAKE) clean
