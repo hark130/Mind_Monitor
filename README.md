@@ -9,6 +9,11 @@ A comparison of various C Programming memory debuggers
 * Memwatch
 * Mtrace
 
+## RUN TESTS
+
+From the `Mind_Monitor` directory:
+`devops/script/test_all.sh`
+
 ## RESULTS
 
 | Filename    | Description         | Dmalloc    | Electric Fence  | Memcheck   | Memwatch   | Mtrace     |
