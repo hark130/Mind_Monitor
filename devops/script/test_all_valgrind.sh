@@ -96,6 +96,11 @@ do
     fi
 
     # Execute valgrind
+    # A. See the valgrind errors
+    # valgrind -q --leak-check=full --track-origins=yes --tool=memcheck\
+    # --child-silent-after-fork=yes --error-exitcode=1\
+    # $TEMP_REL_FILENAME 2>&1 /dev/null
+    # B. Silence the valgrind errors
     valgrind -q --leak-check=full --track-origins=yes --tool=memcheck\
     --child-silent-after-fork=yes --error-exitcode=1\
     $TEMP_REL_FILENAME > /dev/null 2>&1
