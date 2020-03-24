@@ -69,10 +69,11 @@ fi
 
 
 # CHANGE DIRECTORY
-cd "$(dirname "$0")"
+cd "$(dirname "$0")"  # Change directory with respect to this script
+cd ../..  # Change directory to the project's top level
 
 # BUILD
-make --quiet -C ../.. all_$PARAM_NAME 2>&1 /dev/null
+make --quiet all_$PARAM_NAME 2>&1 /dev/null
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"Makefile recipe has failed"
@@ -85,7 +86,7 @@ fi
 for (( i=$PARAM_START; i<=$PARAM_STOP; i++ ))
 do
     TEMP_BIN_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$FILE_EXT
-    TEMP_BIN_REL_FILENAME=../../$DIST_DIRECTORY$TEMP_BIN_FILENAME
+    TEMP_BIN_REL_FILENAME=$DIST_DIRECTORY$TEMP_BIN_FILENAME
     # Verify binary file exists
     test -f $TEMP_REL_FILENAME
     if [ $? -ne 0 ]
@@ -96,7 +97,7 @@ do
 
     # Verify log is removed, thereby guaranteeing a clean slate
     TEMP_MTRACE_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX
-    TEMP_MTRACE_REL_LOG_FILENAME=../../$MTRACE_LOG_DIRECTORY$TEMP_MTRACE_LOG_FILENAME
+    TEMP_MTRACE_REL_LOG_FILENAME=$MTRACE_LOG_DIRECTORY$TEMP_MTRACE_LOG_FILENAME
     test -f $TEMP_MTRACE_REL_LOG_FILENAME
     if [ $? -eq 0 ]
     then
@@ -128,7 +129,7 @@ do
     then
         echo -e "\n"$ERRORS_PREFIX" Mtrace has found an error in "$TEMP_BIN_FILENAME >&2
         echo "Replicate these results with the following command:"
-        echo -e "mtrace "$TEMP_BIN_FILENAME $TEMP_MTRACE_LOG_FILENAME"\n" >&2
+        echo -e "mtrace "$TEMP_BIN_REL_FILENAME $TEMP_MTRACE_REL_LOG_FILENAME"\n" >&2
     else
         echo -e "\n"$FAILURE_PREFIX" Mtrace has failed"
         # Verify mtrace log was created

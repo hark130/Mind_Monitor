@@ -68,10 +68,11 @@ fi
 
 
 # CHANGE DIRECTORY
-cd "$(dirname "$0")"
+cd "$(dirname "$0")"  # Change directory with respect to this script
+cd ../..  # Change directory to the project's top level
 
 # BUILD
-make --quiet -C ../.. all_$PARAM_NAME 2>&1 /dev/null
+make --quiet all_$PARAM_NAME 2>&1 /dev/null
 if [ $? -ne 0 ]
 then
     echo ""
@@ -85,7 +86,7 @@ fi
 # TEST
 for (( i=$PARAM_START; i<=$PARAM_STOP; i++ ))
 do
-    TEMP_REL_FILENAME=../../$DIRECTORY$FILE_PREFIX$i$FILE_EXT
+    TEMP_REL_FILENAME=$DIRECTORY$FILE_PREFIX$i$FILE_EXT
     # Verify file exists
     test -f $TEMP_REL_FILENAME
     if [ $? -ne 0 ]
@@ -110,14 +111,14 @@ do
     if [ $? -eq 0 ]
     then
         echo $SUCCESS_PREFIX"Valgrind has found 0 errors in"\
-        $FILE_PREFIX$i$FILE_EXT
+        $TEMP_REL_FILENAME
     else
         echo ""
         echo $ERRORS_PREFIX"Valgrind has found an error in"\
         $FILE_PREFIX$i$FILE_EXT >&2
         echo "Replicate these results with the following command:"
         echo "valgrind -v --leak-check=full --track-origins=yes"\
-        "--tool=memcheck" $FILE_PREFIX$i$FILE_EXT
+        "--tool=memcheck" $TEMP_REL_FILENAME
         echo ""
         # exit 1
     fi   
