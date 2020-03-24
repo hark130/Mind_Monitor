@@ -9,6 +9,20 @@ A comparison of various C Programming memory debuggers
 * Memwatch
 * Mtrace
 
+## DEPENDENCIES
+
+From the `Mind_Monitor` directory:
+`devops/script/dependency_checker.sh`
+
+| Tool           | Verify | Install |
+| :------------: | :----- | :------ |
+| Dmalloc        | :question: | :question: |
+| Electric Fence | :question: | :question: |
+| Valgrind       | `valgrind --version` | `apt install valgrind` |
+| Memwatch       | :question: | :question: |
+| Mtrace         | `mtrace --version` | :question: |
+
+
 ## RUN TESTS
 
 From the `Mind_Monitor` directory:
