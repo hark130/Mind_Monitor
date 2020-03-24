@@ -48,7 +48,18 @@ EXIT_CODE=0
 print_banner "CHECKING DEPENDENCIES"
 
 # Dmalloc
-echo "[?] Dmalloc"
+dmalloc --version > /dev/null 2>&1
+if [ $? -eq 0 ]
+then
+    echo "[✓] Dmalloc"
+else
+    echo "[ ] Dmalloc is not available"
+    echo "  Replicate this error with the following command:"
+    echo "      dmalloc --version"
+    echo "  Install valgrind with the following command:"
+    echo "      apt install libdmalloc*"
+    EXIT_CODE=1
+fi
 
 # Electric Fence
 echo "[?] Electric Fence"
