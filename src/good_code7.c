@@ -2,6 +2,7 @@
 #include <stdlib.h>         // free()
 #include <string.h>         // memcpy()
 #include "gimme_mem.h"      // gimme_mem_malloc()
+#include "mimo_wrappers.h"  // setup_mimo(), teardown_mimo()
 
 #define BUF_SIZE 64
 
@@ -11,6 +12,9 @@ int main(void)
     /***********************************************************/
     /* 7. Overlapping src and dst pointers in memcpy           */
     /***********************************************************/
+    // SETUP
+    setup_mimo();
+
     // LOCAL VARIABLES
     char sourceBuf[] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n'};
     size_t sourceSize = sizeof(sourceBuf);
@@ -27,5 +31,6 @@ int main(void)
     free(bufOverlapCopy);
 
     // DONE
+    teardown_mimo();
     return 0;
 }

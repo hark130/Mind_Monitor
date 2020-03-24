@@ -4,130 +4,116 @@ DIST = ./dist/
 CODE = ./src/
 
 library:
-# 	echo "\nBUILD LIBRARY\n"
 	$(CC) $(CFLAGS) -o $(DIST)gimme_mem.o -c $(CODE)gimme_mem.c
+	$(CC) $(CFLAGS) -o $(DIST)mimo_wrappers.o -c $(CODE)mimo_wrappers.c
+	$(CC) $(CFLAGS) -o $(DIST)mimo_wrappers_mtrace.o -c $(CODE)mimo_wrappers_mtrace.c
 
 good1:
-# 	$(MAKE) clean
 	$(MAKE) library
-# 	echo "\nBUILD GOOD\n"
 	$(CC) $(CFLAGS) -o $(DIST)good_code1.o -c $(CODE)good_code1.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code1.bin $(DIST)gimme_mem.o $(DIST)good_code1.o
-# 	echo "\nEXECUTE GOOD\n"
-# 	./$(DIST)good_code1.bin
-# 	echo "\nVALGRIND GOOD\n"
-# 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck $(DIST)good_code1.bin
+	$(CC) $(CFLAGS) -o $(DIST)good_code1.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code1.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code1_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code1.o
 
 bad1:
-# 	$(MAKE) clean
 	$(MAKE) library
-# 	echo "\nBUILD BAD\n"
 	$(CC) $(CFLAGS) -o $(DIST)bad_code1.o -c $(CODE)bad_code1.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code1.bin $(DIST)gimme_mem.o $(DIST)bad_code1.o
-# 	echo "\nEXECUTE BAD\n"
-# 	./$(DIST)bad_code1.bin
-# 	echo "\nVALGRIND BAD\n"
-# 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck $(DIST)bad_code1.bin
+	$(CC) $(CFLAGS) -o $(DIST)bad_code1.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code1.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code1_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code1.o
 
 good2:
-# 	$(MAKE) clean
 	$(MAKE) library
-# 	echo "\nBUILD GOOD\n"
 	$(CC) $(CFLAGS) -o $(DIST)good_code2.o -c $(CODE)good_code2.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code2.bin $(DIST)gimme_mem.o $(DIST)good_code2.o
-# 	echo "\nEXECUTE GOOD\n"
-# 	./$(DIST)good_code2.bin
-# 	echo "\nVALGRIND GOOD\n"
-# 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck $(DIST)good_code2.bin
+	$(CC) $(CFLAGS) -o $(DIST)good_code2.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code2.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code2_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code2.o
 
 bad2:
-# 	$(MAKE) clean
 	$(MAKE) library
-# 	echo "\nBUILD BAD\n"
 	$(CC) $(CFLAGS) -o $(DIST)bad_code2.o -c $(CODE)bad_code2.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code2.bin $(DIST)gimme_mem.o $(DIST)bad_code2.o
-# 	echo "\nEXECUTE BAD\n"
-# 	./$(DIST)bad_code2.bin
-# 	echo "\nVALGRIND BAD\n"
-# 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck $(DIST)bad_code2.bin
+	$(CC) $(CFLAGS) -o $(DIST)bad_code2.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code2.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code2_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code2.o
 
 good3:
-# 	$(MAKE) clean
 	$(MAKE) library
-# 	echo "\nBUILD GOOD\n"
 	$(CC) $(CFLAGS) -o $(DIST)good_code3.o -c $(CODE)good_code3.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code3.bin $(DIST)gimme_mem.o $(DIST)good_code3.o
-# 	echo "\nEXECUTE GOOD\n"
-# 	./$(DIST)good_code3.bin
-# 	echo "\nVALGRIND GOOD\n"
-# 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck $(DIST)good_code3.bin
+	$(CC) $(CFLAGS) -o $(DIST)good_code3.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code3.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code3_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code3.o
 
 bad3:
-# 	$(MAKE) clean
 	$(MAKE) library
-# 	echo "\nBUILD BAD\n"
 	$(CC) $(CFLAGS) -o $(DIST)bad_code3.o -c $(CODE)bad_code3.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code3.bin $(DIST)gimme_mem.o $(DIST)bad_code3.o
-# 	echo "\nEXECUTE BAD\n"
-# 	./$(DIST)bad_code3.bin
-# 	echo "\nVALGRIND BAD\n"
-# 	valgrind -v --leak-check=full --track-origins=yes --tool=memcheck --error-exitcode=1 $(DIST)bad_code3.bin
+	$(CC) $(CFLAGS) -o $(DIST)bad_code3.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code3.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code3_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code3.o
 
 good4:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)good_code4.o -c $(CODE)good_code4.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code4.bin $(DIST)gimme_mem.o $(DIST)good_code4.o
+	$(CC) $(CFLAGS) -o $(DIST)good_code4.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code4.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code4_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code4.o
 
 bad4:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)bad_code4.o -c $(CODE)bad_code4.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code4.bin $(DIST)gimme_mem.o $(DIST)bad_code4.o
+	$(CC) $(CFLAGS) -o $(DIST)bad_code4.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code4.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code4_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code4.o
 
 good5:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)good_code5.o -c $(CODE)good_code5.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code5.bin $(DIST)gimme_mem.o $(DIST)good_code5.o
+	$(CC) $(CFLAGS) -o $(DIST)good_code5.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code5.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code5_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code5.o
 
 bad5:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)bad_code5.o -c $(CODE)bad_code5.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code5.bin $(DIST)gimme_mem.o $(DIST)bad_code5.o
+	$(CC) $(CFLAGS) -o $(DIST)bad_code5.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code5.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code5_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code5.o
 
 good6:
-	$(CC) -o $(DIST)good_code6.bin $(CODE)good_code6.c
+	$(MAKE) library
+	$(CC) -o $(DIST)good_code6.bin $(DIST)mimo_wrappers.o $(CODE)good_code6.c
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code6_mtrace.bin $(DIST)mimo_wrappers_mtrace.o $(CODE)good_code6.c
 
 bad6:
-	$(CC) -o $(DIST)bad_code6.bin $(CODE)bad_code6.c
+	$(MAKE) library
+	$(CC) -o $(DIST)bad_code6.bin $(DIST)mimo_wrappers.o $(CODE)bad_code6.c
+	# Removed $(CFLAGS) to avoid compiler warning about the bad code
+	$(CC) -g -o $(DIST)bad_code6_mtrace.bin $(DIST)mimo_wrappers_mtrace.o $(CODE)bad_code6.c
 
 good7:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)good_code7.o -c $(CODE)good_code7.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code7.bin $(DIST)gimme_mem.o $(DIST)good_code7.o
+	$(CC) $(CFLAGS) -o $(DIST)good_code7.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code7.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code7_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code7.o
 
 bad7:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)bad_code7.o -c $(CODE)bad_code7.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code7.bin $(DIST)gimme_mem.o $(DIST)bad_code7.o
+	$(CC) $(CFLAGS) -o $(DIST)bad_code7.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code7.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code7_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code7.o
 
 good8:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)good_code8.o -c $(CODE)good_code8.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code8.bin $(DIST)gimme_mem.o $(DIST)good_code8.o
+	$(CC) $(CFLAGS) -o $(DIST)good_code8.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code8.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code8_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code8.o
 
 bad8:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)bad_code8.o -c $(CODE)bad_code8.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code8.bin $(DIST)gimme_mem.o $(DIST)bad_code8.o
+	$(CC) $(CFLAGS) -o $(DIST)bad_code8.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code8.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code8_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code8.o
 
 good9:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)good_code9.o -c $(CODE)good_code9.c
-	$(CC) $(CFLAGS) -o $(DIST)good_code9.bin $(DIST)gimme_mem.o $(DIST)good_code9.o
+	$(CC) $(CFLAGS) -o $(DIST)good_code9.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code9.o
+	$(CC) $(CFLAGS) -g -o $(DIST)good_code9_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code9.o
 
 bad9:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)bad_code9.o -c $(CODE)bad_code9.c
-	$(CC) $(CFLAGS) -o $(DIST)bad_code9.bin $(DIST)gimme_mem.o $(DIST)bad_code9.o
+	$(CC) $(CFLAGS) -o $(DIST)bad_code9.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code9.o
+	$(CC) $(CFLAGS) -g -o $(DIST)bad_code9_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code9.o
 
 all_good:
 	$(MAKE) good1
