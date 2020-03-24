@@ -17,9 +17,9 @@ From the `Mind_Monitor` directory:
 | Tool           | Verify | Install |
 | :------------: | :----- | :------ |
 | Dmalloc        | `dmalloc --version` | `apt install libdmalloc*` |
-| Electric Fence | :question: | :question: |
+| Electric Fence | :grey_question: | :grey_question: |
 | Valgrind       | `valgrind --version` | `apt install valgrind` |
-| Memwatch       | :question: | :question: |
+| Memwatch       | :grey_question: | :grey_question: |
 | Mtrace         | `mtrace --version` | Built into glibc |
 
 
@@ -30,17 +30,17 @@ From the `Mind_Monitor` directory:
 
 ## RESULTS
 
-| Filename    | Description         | Dmalloc    | Electric Fence  | Memcheck   | Memwatch   | Mtrace     |
-| :---------- | :------------------ | :--------: | :-------------: | :--------: | :--------: | :--------: |
-| bad_code1.c | Uninit. mem         | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
-| bad_code2.c | Buffer overflow     | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
-| bad_code3.c | Memory leak         | :question: | :question:      | :heavy_check_mark:       | :question: | :heavy_check_mark:       |
-| bad_code4.c | Invalid mem access  | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
-| bad_code5.c | Double free         | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
-| bad_code6.c | Uninit. integer     | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
-| bad_code7.c | Overlapping memcpy  | :question: | :question:      | :x:       | :question: | :x:       |
-| bad_code8.c | Fishy malloc values | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
-| bad_code9.c | Fishy calloc values | :question: | :question:      | :heavy_check_mark:       | :question: | :x:       |
+| Filename    | Description         | Dmalloc         | Electric Fence  | Memcheck           | Memwatch        | Mtrace     |
+| :---------- | :------------------ | :-------------: | :-------------: | :----------------: | :-------------: | :--------: |
+| bad_code1.c | Uninit. mem         | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
+| bad_code2.c | Buffer overflow     | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
+| bad_code3.c | Memory leak         | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :heavy_check_mark: |
+| bad_code4.c | Invalid mem access  | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
+| bad_code5.c | Double free         | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
+| bad_code6.c | Uninit. integer     | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
+| bad_code7.c | Overlapping memcpy  | :grey_question: | :grey_question: | :x: | :grey_question: | :x: |
+| bad_code8.c | Fishy malloc values | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
+| bad_code9.c | Fishy calloc values | :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :x: |
 
 
 NOTE:  Some ideas came from https://valgrind.org/docs/manual/mc-manual.html
