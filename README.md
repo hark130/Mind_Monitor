@@ -16,11 +16,11 @@ From the `Mind_Monitor` directory:
 
 | Tool           | Verify | Install |
 | :------------: | :----- | :------ |
-| Dmalloc        | :question: | :question: |
+| Dmalloc        | `dmalloc --version` | `apt install libdmalloc*` |
 | Electric Fence | :question: | :question: |
 | Valgrind       | `valgrind --version` | `apt install valgrind` |
 | Memwatch       | :question: | :question: |
-| Mtrace         | `mtrace --version` | :question: |
+| Mtrace         | `mtrace --version` | Built into glibc |
 
 
 ## RUN TESTS
