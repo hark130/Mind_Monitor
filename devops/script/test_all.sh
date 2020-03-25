@@ -58,6 +58,11 @@ then
     exit 1
 fi
 
+# Dmalloc
+print_banner "DMALLOC TESTS"
+./test_all_dmalloc.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+./test_all_dmalloc.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+
 # Valgrind
 print_banner "VALGRIND TESTS"
 ./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
@@ -67,3 +72,6 @@ print_banner "VALGRIND TESTS"
 print_banner "MTRACE TESTS"
 ./test_all_mtrace.sh good $GOOD_START_NUM $GOOD_STOP_NUM
 ./test_all_mtrace.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+
+# DONE
+echo ""
