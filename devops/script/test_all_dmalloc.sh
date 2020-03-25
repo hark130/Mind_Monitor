@@ -13,6 +13,20 @@
 #       - dist/[name]_code{1-3}_dmalloc.bin
 #       - /usr/share/doc/libdmalloc-dev/examples/contrib/dmalloc_summarize.pl < devops/logs/[name]_code{1-3}_dmalloc
 #   Validates all input
+# DISCLAIMER:
+#   Whether it's user error, Dmalloc BUGS, bad documentation, or some
+#   combination of all of the above, I don't like Dmalloc.  The Perl script's
+#   output doesn't mention ERRORs from the log file and otherwise isn't very
+#   useful or readable.  The log file itself is a mess and difficult to read.
+#   (Isn't the Perl script supposed to be parsing the log for me?!)  The worst
+#   part is the false positives.  I am unable to determine why (I stopped short
+#   of using gdb) Dmalloc is reporting heap-based memory leaks for code that
+#   doesn't allocate memory on the heap.  These false positives essentially
+#   make this tool unusable.  The "check to see if Dmalloc found a problem"
+#   statements below are a bit of a "shunt" around Dmalloc's failings.
+#   I search the Perl script output for mentions of the directory I store my
+#   source code in.  I also grep the log file for "ERROR".  That's about as
+#   much use as I can squeeze out of Dmalloc.
 
 PARAM_NAME=$1
 PARAM_START=$2
