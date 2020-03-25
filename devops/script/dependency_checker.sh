@@ -43,8 +43,11 @@ print_banner()
 
 # LOCAL VARIABLES
 EXIT_CODE=0
+DMALLOC_SUMMARIZE_PATH="/usr/share/doc/libdmalloc-dev/examples/contrib/"
+DMALLOC_SUMMARIZE_FILE="dmalloc_summarize.pl"
+DMALLOC_SUMMARIZE_ABS_PATH=$DMALLOC_SUMMARIZE_PATH$DMALLOC_SUMMARIZE_FILE
 
-
+# CHECK DEPENDENCIES
 print_banner "CHECKING DEPENDENCIES"
 
 # Dmalloc
@@ -52,6 +55,16 @@ dmalloc --version > /dev/null 2>&1
 if [ $? -eq 0 ]
 then
     echo "[✓] Dmalloc"
+    # dmalloc_summarize.pl
+    test -f $DMALLOC_SUMMARIZE_ABS_PATH
+    if [ $? -ne 0 ]
+    then
+        echo "[ ] Dmalloc's "$DMALLOC_SUMMARIZE_FILE
+        echo -e "  Failed to find"$DMALLOC_SUMMARIZE_FILE
+        echo "  Attempt to find it with the following command:"
+        echo -e "      find / -iname "$DMALLOC_SUMMARIZE_FILE"\n"
+        EXIT_CODE=1
+    fi
 else
     echo "[ ] Dmalloc is not available"
     echo "  Replicate this error with the following command:"
