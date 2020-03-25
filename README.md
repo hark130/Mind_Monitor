@@ -17,7 +17,7 @@ From the `Mind_Monitor` directory:
 | Tool           | Verify | Install |
 | :------------: | :----- | :------ |
 | Dmalloc        | `dmalloc --version` | `apt install libdmalloc*` |
-| Electric Fence | :grey_question: | :grey_question: |
+| Electric Fence | `dpkg-query --list electric-fence` | `apt install electric-fence` |
 | Valgrind       | `valgrind --version` | `apt install valgrind` |
 | Memwatch       | :grey_question: | :grey_question: |
 | Mtrace         | `mtrace --version` | Built into glibc |

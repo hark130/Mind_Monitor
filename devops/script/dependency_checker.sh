@@ -69,13 +69,26 @@ else
     echo "[ ] Dmalloc is not available"
     echo "  Replicate this error with the following command:"
     echo "      dmalloc --version"
-    echo "  Install valgrind with the following command:"
+    echo "  Install Dmalloc with the following command:"
     echo "      apt install libdmalloc*"
     EXIT_CODE=1
 fi
 
 # Electric Fence
-echo "[?] Electric Fence"
+dpkg-query --list electric-fence > /dev/null 2>&1
+if [ $? -eq 0 ]
+then
+    echo "[✓] Electric Fence"
+else
+    echo "[ ] Electric Fence is not available"
+    echo "  Replicate this error with the following command:"
+    echo "      dpkg-query --list electric-fence"
+    echo "      -or-"
+    echo "      man efence"
+    echo "  Install Electric Fence with the following command:"
+    echo "      apt install electric-fence"
+    EXIT_CODE=1
+fi
 
 # Memcheck (AKA Valgrind)
 valgrind --version > /dev/null 2>&1
@@ -86,7 +99,7 @@ else
     echo "[ ] Valgrind is not available"
     echo "  Replicate this error with the following command:"
     echo "      valgrind --version"
-    echo "  Install valgrind with the following command:"
+    echo "  Install Valgrind with the following command:"
     echo "      apt install valgrind"
     EXIT_CODE=1
 fi
