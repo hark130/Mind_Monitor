@@ -21,7 +21,8 @@ DIST_DIRECTORY="dist/"
 MTRACE_LOG_DIRECTORY="devops/logs/"
 FILE_PREFIX=$PARAM_NAME"_code"
 TOOL_SUFFIX="_mtrace"
-FILE_EXT=".bin"
+BIN_FILE_EXT=".bin"
+LOG_FILE_EXT=".log"
 SUCCESS_PREFIX="Success: "
 FAILURE_PREFIX="FAILURE! "
 ERRORS_PREFIX="ERRORS! "
@@ -85,18 +86,18 @@ fi
 # TEST
 for (( i=$PARAM_START; i<=$PARAM_STOP; i++ ))
 do
-    TEMP_BIN_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$FILE_EXT
+    TEMP_BIN_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$BIN_FILE_EXT
     TEMP_BIN_REL_FILENAME=$DIST_DIRECTORY$TEMP_BIN_FILENAME
     # Verify binary file exists
     test -f $TEMP_REL_FILENAME
     if [ $? -ne 0 ]
     then
-        echo -e "\n"$FAILURE_PREFIX$FILE_PREFIX$i$FILE_EXT" does not exist\n"
+        echo -e "\n"$FAILURE_PREFIX$FILE_PREFIX$i$BIN_FILE_EXT" does not exist\n"
         exit 1
     fi
 
     # Verify log is removed, thereby guaranteeing a clean slate
-    TEMP_MTRACE_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX
+    TEMP_MTRACE_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$LOG_FILE_EXT
     TEMP_MTRACE_REL_LOG_FILENAME=$MTRACE_LOG_DIRECTORY$TEMP_MTRACE_LOG_FILENAME
     test -f $TEMP_MTRACE_REL_LOG_FILENAME
     if [ $? -eq 0 ]
