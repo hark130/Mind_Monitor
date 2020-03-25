@@ -1,6 +1,10 @@
 #ifndef __MIMO_WRAPPERS_H__
 #define __MIMO_WRAPPERS_H__
 
+#ifdef MIMO_DMALLOC
+#include <dmalloc.h>
+#endif  // MIMO_DMALLOC
+
 
 /*
  * Purpose - Modular wrapper to handle debugger setup with minimal code
