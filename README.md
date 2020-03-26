@@ -22,7 +22,6 @@ From the `Mind_Monitor` directory:
 | Memwatch       | :grey_question: | :grey_question: |
 | Mtrace         | `mtrace --version` | Built into glibc |
 
-
 ## RUN TESTS
 
 From the `Mind_Monitor` directory:
