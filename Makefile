@@ -199,5 +199,5 @@ clean_logs:
 	@$(MAKE) clean_bad_logs
 
 clean:
-	@$(MAKE) clean_logs
+	@$(MAKE) clean_logs > /dev/null 2>&1
 	@rm -f $(DIST)*.o $(DIST)*.exe $(DIST)*.bin $(DIST)*.lib $(DIST)*.so
