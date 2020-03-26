@@ -36,7 +36,8 @@ DIST_DIRECTORY="dist/"
 DMALLOC_LOG_DIRECTORY="devops/logs/"
 FILE_PREFIX=$PARAM_NAME"_code"
 TOOL_SUFFIX="_dmalloc"
-FILE_EXT=".bin"
+BIN_FILE_EXT=".bin"
+LOG_FILE_EXT=".log"
 SUCCESS_PREFIX="Success: "  # Use this when the test results are favorable
 FAILURE_PREFIX="FAILURE! "  # Use this when some aspect of the shell script errors
 ERRORS_PREFIX="ERRORS! "    # Use this when the test results are not favorable
@@ -113,7 +114,7 @@ fi
 for (( i=$PARAM_START; i<=$PARAM_STOP; i++ ))
 do
     DMALLOC_FAILURE=0  # Reset temp variable
-    TEMP_BIN_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$FILE_EXT
+    TEMP_BIN_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$BIN_FILE_EXT
     TEMP_BIN_REL_FILENAME=$DIST_DIRECTORY$TEMP_BIN_FILENAME
     # Verify binary file exists
     test -f $TEMP_BIN_REL_FILENAME
@@ -124,7 +125,7 @@ do
     fi
 
     # Verify log is removed, thereby guaranteeing a clean slate
-    TEMP_DMALLOC_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX
+    TEMP_DMALLOC_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$LOG_FILE_EXT
     TEMP_DMALLOC_REL_LOG_FILENAME=$DMALLOC_LOG_DIRECTORY$TEMP_DMALLOC_LOG_FILENAME
     test -f $TEMP_DMALLOC_REL_LOG_FILENAME
     if [ $? -eq 0 ]

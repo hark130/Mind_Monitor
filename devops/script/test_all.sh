@@ -63,6 +63,11 @@ print_banner "DMALLOC TESTS"
 ./test_all_dmalloc.sh good $GOOD_START_NUM $GOOD_STOP_NUM
 ./test_all_dmalloc.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
 
+# Electric Fence
+print_banner "ELECTRIC FENCE TESTS"
+./test_all_efence.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+./test_all_efence.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+
 # Valgrind
 print_banner "VALGRIND TESTS"
 ./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
