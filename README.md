@@ -14,13 +14,18 @@ A comparison of various C Programming memory debuggers
 From the `Mind_Monitor` directory:
 `devops/script/dependency_checker.sh`
 
-| Tool           | Verify | Install |
-| :------------: | :----- | :------ |
-| Dmalloc        | `dmalloc --version` | `apt install libdmalloc*` |
+| Tool           | Verify                             | Install                      |
+| :------------: | :--------------------------------- | :--------------------------- |
+| Dmalloc        | `dmalloc --version`                | `apt install libdmalloc*`    |
 | Electric Fence | `dpkg-query --list electric-fence` | `apt install electric-fence` |
-| Valgrind       | `valgrind --version` | `apt install valgrind` |
-| Memwatch       | :grey_question: | :grey_question: |
-| Mtrace         | `mtrace --version` | Built into glibc |
+| Valgrind       | `valgrind --version`               | `apt install valgrind`       |
+| Memwatch       | `ls src/memwatch.?`                | See † below                  |
+| Mtrace         | `mtrace --version`                 | Built into glibc             |
+
+†
+`wget -P ~/Downloads/ https://www.linkdata.se/downloads/sourcecode/memwatch/memwatch-2.71.tar.gz"`
+`tar -xvf ~/Downloads/memwatch-2.71.tar.gz -C ~/Downloads/`
+`cp ~/Downloads/memwatch-2.71/memwatch.? src/`
 
 ## RUN TESTS
 
