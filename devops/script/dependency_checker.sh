@@ -41,11 +41,17 @@ print_banner()
 }
 
 
+# CHANGE DIRECTORY
+cd "$(dirname "$0")"  # Change directory with respect to this script
+cd ../..  # Change directory to the project's top level
+
 # LOCAL VARIABLES
 EXIT_CODE=0
 DMALLOC_SUMMARIZE_PATH="/usr/share/doc/libdmalloc-dev/examples/contrib/"
 DMALLOC_SUMMARIZE_FILE="dmalloc_summarize.pl"
 DMALLOC_SUMMARIZE_ABS_PATH=$DMALLOC_SUMMARIZE_PATH$DMALLOC_SUMMARIZE_FILE
+RESULT_ONE=0    # Use this for checking two command results at once
+RESULT_TWO=0    # Use this for checking two command results at once
 
 # CHECK DEPENDENCIES
 print_banner "CHECKING DEPENDENCIES"
@@ -105,7 +111,24 @@ else
 fi
 
 # Memwatch
-echo "[?] Memwatch"
+ls src/memwatch.h > /dev/null 2>&1
+RESULT_ONE=$?
+ls src/memwatch.c > /dev/null 2>&1
+RESULT_TWO=$?
+if [ $RESULT_ONE -eq 0 ] && [ $RESULT_TWO -eq 0 ]
+then
+    echo "[✓] Memwatch"
+else
+    echo "[ ] Memwatch is not available"
+    echo "  Replicate this error with the following command from the 'Mind_Monitor' directory:"
+    echo "      ls src/memwatch.?"
+    echo "  As to installing Memwatch... The Memwatch files have been source-controlled in this repository.  How do you *not* have them?!"
+    echo "  Install Memwatch with the following commands:"
+    echo "      wget -P ~/Downloads/ https://www.linkdata.se/downloads/sourcecode/memwatch/memwatch-2.71.tar.gz"
+    echo "      tar -xvf ~/Downloads/memwatch-2.71.tar.gz -C ~/Downloads/"
+    echo "      cp ~/Downloads/memwatch-2.71/memwatch.? src/"
+    EXIT_CODE=1
+fi
 
 # Mtrace
 mtrace --version > /dev/null 2>&1
