@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Purpose - Check the local system for necessary Mind Monitor (MIMO) dependencies
 
 # Purpose - Print an octothorp a certain number of times
 print_line()
