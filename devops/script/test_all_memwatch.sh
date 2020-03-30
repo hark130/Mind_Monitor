@@ -5,10 +5,10 @@
 #   start - Lowest numbered filename
 #   stop - Highest numbered filename
 # USAGE: test_all_memwatch.sh [type] [start] [stop]
-# EXAMPLE: test_all_memwatch.sh good 1 3  # Runs mtrace on good_code{1-3}_mtrace.bin
+# EXAMPLE: test_all_memwatch.sh good 1 3  # Runs good_code{1-3}_memwatch.bin (memwatch binaries)
 # NOTES:
 #   Executes in the following order:
-#       make all_[name]; dist/[name]_code{1-3}_efence.bin; grep <errors> memwatch.log
+#       make all_[name]; dist/[name]_code{1-3}_memwatch.bin; grep <errors> memwatch.log
 #   Validates all input
 #   Greps the Memwatch log for references to:
 #       - /src/
