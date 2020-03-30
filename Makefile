@@ -186,6 +186,8 @@ good10:
 	$(CC) $(CFLAGS) -o $(DIST)good_code10.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code10.o
 	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)good_code10_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code10.o
 	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)good_code10_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)good_code10.c -ldmallocth
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)good_code10_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)good_code10.c -lefence
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)good_code10_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)good_code10.c
 
 bad10:
 	$(MAKE) library
@@ -193,6 +195,8 @@ bad10:
 	$(CC) $(CFLAGS) -o $(DIST)bad_code10.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code10.o
 	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)bad_code10_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code10.o
 	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)bad_code10_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)bad_code10.c -ldmallocth
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)bad_code10_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code10.c -lefence
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code10_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code10.c
 
 all_good:
 	$(MAKE) clean_good_logs
