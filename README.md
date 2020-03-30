@@ -29,27 +29,27 @@ From the `Mind_Monitor` directory:
 
 ## TEST RESULTS
 
-| Filename    | Description         | Dmalloc                         | Electric Fence           | Valgrind           | Memwatch        | Mtrace     |
-| :---------- | :------------------ | :-----------------------------: | :----------------------: | :----------------: | :-------------: | :--------: |
-| bad_code1.c | Uninit. mem         | :x::anger:                      | :x:                      | :heavy_check_mark: | :grey_question: | :x: |
-| bad_code2.c | Buffer overflow     | :heavy_check_mark::anger::boom: | :x:                      | :heavy_check_mark: | :grey_question: | :x: |
-| bad_code3.c | Memory leak         | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark: | :grey_question: | :heavy_check_mark: |
-| bad_code4.c | Invalid mem access  | :x::anger:                      | :x::boom:                | :heavy_check_mark: | :grey_question: | :x: |
-| bad_code5.c | Double free         | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark: | :grey_question: | :x: |
-| bad_code6.c | Uninit. integer     | :x::anger:                      | :x:                      | :heavy_check_mark: | :grey_question: | :x: |
-| bad_code7.c | Overlapping memcpy  | :x::anger:                      | :x:                      | :x:                | :grey_question: | :x: |
-| bad_code8.c | Fishy malloc values | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark::boom: | :grey_question: | :x::boom: |
-| bad_code9.c | Fishy calloc values | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :grey_question: | :x::boom: |
+| Filename    | Description         | Dmalloc                         | Electric Fence           | Valgrind                 | Memwatch           | Mtrace     |
+| :---------- | :------------------ | :-----------------------------: | :----------------------: | :----------------------: | :----------------: | :--------: |
+| bad_code1.c | Uninit. mem         | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x:                | :x: |
+| bad_code2.c | Buffer overflow     | :heavy_check_mark::anger::boom: | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :x: |
+| bad_code3.c | Memory leak         | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
+| bad_code4.c | Invalid mem access  | :x::anger:                      | :x::boom:                | :heavy_check_mark:       | :x:                | :x: |
+| bad_code5.c | Double free         | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark:       | :heavy_check_mark: | :x: |
+| bad_code6.c | Uninit. integer     | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x::anger:         | :x: |
+| bad_code7.c | Overlapping memcpy  | :x::anger:                      | :x:                      | :x:                      | :x:                | :x: |
+| bad_code8.c | Fishy malloc values | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
+| bad_code9.c | Fishy calloc values | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
 
 **LEGEND**
 
-| Emoji              | Meaning                              |
-| :----------------: | :----------------------------------- |
-| :anger:            | False positive or misleading results |
-| :boom:             | Seg fault or core dump               |
-| :grey_question:    | Test not yet executed                |
-| :heavy_check_mark: | Succeeded in finding the error       |
-| :x:                | Failed to find the error             |
+| Emoji              | Meaning                                    |
+| :----------------: | :----------------------------------------- |
+| :anger:            | False positive, misleading/missing results |
+| :boom:             | Seg fault or core dump                     |
+| :grey_question:    | Test not yet executed                      |
+| :heavy_check_mark: | Succeeded in finding the error             |
+| :x:                | Failed to find the error                   |
 
 NOTE:  Some ideas came from https://valgrind.org/docs/manual/mc-manual.html
 
