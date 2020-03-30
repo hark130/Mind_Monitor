@@ -1,5 +1,10 @@
 #!/bin/bash
-# Purpose - Automate the download, extraction, and installation of necessary Memwatch files
+# Purpose - Automate the download, extraction, and installation of
+#   necessary Memwatch files
+# Exit Codes
+#   1 if the download fails
+#   2 if the extraction fails
+#   3 if the copy fails
 
 
 # Purpose - Print an octothorp a certain number of times
@@ -42,7 +47,7 @@ print_banner()
 }
 
 # LOCAL VARIABLES
-FAILURE_PREFIX="FAILURE! "  # Use this when some aspect of the shell script errors
+FAILURE_PREFIX="FAILURE! "  # Use this when the shell script errors
 
 # PRINT BANNER
 print_banner "INSTALL MEMWATCH"
@@ -59,6 +64,7 @@ then
     echo -e "\n"$FAILURE_PREFIX" Download failed\n" >&2
     exit 1
 fi
+
 # EXTRACT
 print_banner "2. Extract"
 tar -xvf ~/Downloads/memwatch-2.71.tar.gz -C ~/Downloads/
@@ -67,6 +73,7 @@ then
     echo -e "\n"$FAILURE_PREFIX" Extraction failed\n" >&2
     exit 2
 fi
+
 # COPY
 print_banner "3. Copy"
 cp -v ~/Downloads/memwatch-2.71/memwatch.? src/
