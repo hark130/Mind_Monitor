@@ -5,6 +5,10 @@
 #include <dmalloc.h>
 #endif  // MIMO_DMALLOC
 
+#ifdef MEMWATCH
+#include "memwatch.h"
+#endif  // MEMWATCH
+
 
 /*
  * Purpose - Modular wrapper to handle debugger setup with minimal code
