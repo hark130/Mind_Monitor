@@ -73,6 +73,11 @@ print_banner "VALGRIND TESTS"
 ./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
 ./test_all_valgrind.sh bad $BAD_START_NUM $BAD_STOP_NUM
 
+# Memwatch
+print_banner "MEMWATCH TESTS"
+./test_all_memwatch.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+./test_all_memwatch.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+
 # Mtrace
 print_banner "MTRACE TESTS"
 ./test_all_mtrace.sh good $GOOD_START_NUM $GOOD_STOP_NUM
