@@ -199,7 +199,6 @@ bad10:
 	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code10_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code10.c
 
 all_good:
-	$(MAKE) clean_good_logs
 	$(MAKE) good1
 	$(MAKE) good2
 	$(MAKE) good3
@@ -212,7 +211,6 @@ all_good:
 	$(MAKE) good10
 
 all_bad:
-	$(MAKE) clean_bad_logs
 	$(MAKE) bad1
 	$(MAKE) bad2
 	$(MAKE) bad3
