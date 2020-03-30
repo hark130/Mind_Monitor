@@ -106,15 +106,15 @@ do
     fi
 
     # Verify log is removed, thereby guaranteeing a clean slate
-    TEMP_MTRACE_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$LOG_FILE_EXT
-    TEMP_MTRACE_REL_LOG_FILENAME=$MIMO_LOG_DIRECTORY$TEMP_MTRACE_LOG_FILENAME
-    test -f $TEMP_MTRACE_REL_LOG_FILENAME
+    TEMP_EFENCE_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$LOG_FILE_EXT
+    TEMP_EFENCE_REL_LOG_FILENAME=$MIMO_LOG_DIRECTORY$TEMP_EFENCE_LOG_FILENAME
+    test -f $TEMP_EFENCE_REL_LOG_FILENAME
     if [ $? -eq 0 ]
     then
-        rm -f $TEMP_MTRACE_REL_LOG_FILENAME
+        rm -f $TEMP_EFENCE_REL_LOG_FILENAME
         if [ $? -ne 0 ]
         then
-            echo -e "\n"$FAILURE_PREFIX" failed to delete"$TEMP_MTRACE_REL_LOG_FILENAME >&2
+            echo -e "\n"$FAILURE_PREFIX" failed to delete"$TEMP_EFENCE_REL_LOG_FILENAME >&2
         fi
     fi
 
@@ -130,7 +130,7 @@ do
         exit 1
     fi
     # Rename the temp log file
-    mv $GDB_REL_LOG_FILENAME $TEMP_MTRACE_REL_LOG_FILENAME
+    mv $GDB_REL_LOG_FILENAME $TEMP_EFENCE_REL_LOG_FILENAME
     if [ $? -ne 0 ]
     then
         echo -e "\n"$FAILURE_PREFIX" Failed to rename the log file\n" >&2
@@ -139,14 +139,14 @@ do
     # Check the log file
     for EFENCE_ERROR_STRING in "/src/" "ElectricFence Aborting"
     do
-        grep "$EFENCE_ERROR_STRING" $TEMP_MTRACE_REL_LOG_FILENAME > /dev/null 2>&1
+        grep "$EFENCE_ERROR_STRING" $TEMP_EFENCE_REL_LOG_FILENAME > /dev/null 2>&1
         if [ $? -eq 0 ]
         then
             echo -e "\n"$ERRORS_PREFIX" Electric Fence has found an error inside "$TEMP_BIN_REL_FILENAME >&2
             echo "View this error with one of the following commands:" >&2
-            echo "cat "$TEMP_MTRACE_REL_LOG_FILENAME >&2
+            echo "cat "$TEMP_EFENCE_REL_LOG_FILENAME >&2
             echo "-or-" >&2
-            echo -e "grep \""$EFENCE_ERROR_STRING"\"" $TEMP_MTRACE_REL_LOG_FILENAME"\n" >&2
+            echo -e "grep \""$EFENCE_ERROR_STRING"\"" $TEMP_EFENCE_REL_LOG_FILENAME"\n" >&2
             EFENCE_FAILURE=1
         fi
     done
