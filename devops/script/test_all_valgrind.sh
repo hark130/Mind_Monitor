@@ -118,9 +118,9 @@ do
         $FILE_PREFIX$i$FILE_EXT >&2
         echo "Replicate these results with the following command:"
         echo "valgrind -v --leak-check=full --track-origins=yes"\
-        "--tool=memcheck" $TEMP_REL_FILENAME
+        "--tool=memcheck --child-silent-after-fork=yes"\
+        "--trace-children=yes" $TEMP_REL_FILENAME
         echo ""
-        # exit 1
     fi   
 done
 
