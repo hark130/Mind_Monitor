@@ -180,6 +180,16 @@ bad9:
 	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)bad_code9_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code9.c -lefence
 	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code9_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code9.c
 
+good10:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code10.o -c $(CODE)good_code10.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code10.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code10.o
+
+bad10:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code10.o -c $(CODE)bad_code10.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code10.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code10.o
+
 all_good:
 	$(MAKE) clean_good_logs
 	$(MAKE) good1
@@ -191,6 +201,7 @@ all_good:
 	$(MAKE) good7
 	$(MAKE) good8
 	$(MAKE) good9
+	$(MAKE) good10
 
 all_bad:
 	$(MAKE) clean_bad_logs
@@ -203,6 +214,7 @@ all_bad:
 	$(MAKE) bad7
 	$(MAKE) bad8
 	$(MAKE) bad9
+	$(MAKE) bad10
 
 all:
 	$(MAKE) clean
