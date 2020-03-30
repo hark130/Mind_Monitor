@@ -6,6 +6,8 @@
 #include "gimme_mem.h"      // gimme_mem_malloc()
 #include "mimo_wrappers.h"  // setup_mimo(), teardown_mimo()
 
+#define BUF_SIZE 64
+
 
 /*
  *  Purpose - Encapsulate all the work the child process will do
@@ -26,12 +28,12 @@ int main(void)
     pid = fork();
     if (pid < 0)
     {
-        fprintf(stderr, "PARENT: Failed to fork!");
+        fprintf(stderr, "PARENT: Failed to fork!\n");
         exit(EXIT_FAILURE);  // Error
     }
     else if (pid > 0)
     {
-        fprintf(stdout, "PARENT: Fork successful");
+        fprintf(stdout, "PARENT: Fork successful\n");
         exit(EXIT_SUCCESS);  // Child process successfully forked
     }
 
@@ -51,7 +53,7 @@ int execute_child(void)
     strcpy(bufLeak, "Hello World!\n");
 
     // PRINT
-    printf("%s", bufLeak);
+    printf("CHILD: %s", bufLeak);
 
     // CLEAN UP
     free(bufLeak);
