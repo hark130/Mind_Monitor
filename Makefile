@@ -216,6 +216,16 @@ bad11:
 	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)bad_code11_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code11.c -lefence
 	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code11_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code11.c
 
+good12:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code12.o -c $(CODE)good_code12.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code12.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code12.o -pthread
+
+bad12:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code12.o -c $(CODE)bad_code12.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code12.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code12.o -pthread
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
@@ -228,6 +238,7 @@ all_good:
 	$(MAKE) good9
 	$(MAKE) good10
 	$(MAKE) good11
+	$(MAKE) good12
 
 all_bad:
 	$(MAKE) bad1
@@ -241,6 +252,7 @@ all_bad:
 	$(MAKE) bad9
 	$(MAKE) bad10
 	$(MAKE) bad11
+	$(MAKE) bad12
 
 all:
 	$(MAKE) clean
