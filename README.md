@@ -42,6 +42,8 @@ From the `Mind_Monitor` directory:
 | bad_code9.c  | Fishy calloc values       | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
 | bad_code10.c | Multi-process memory leak | :heavy_check_mark:              | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
 | bad_code11.c | Multi-process double free | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x: |
+| bad_code12.c | Multi-thread memory leak  | :grey_question:                 | :grey_question:          | :grey_question:          | :grey_question:    | :grey_question: |
+| bad_code13.c | Multi-thread double free  | :grey_question:                 | :grey_question:          | :grey_question:          | :grey_question:    | :grey_question: |
 
 **LEGEND**
 
@@ -57,6 +59,8 @@ NOTES:
 	- Some ideas came from https://valgrind.org/docs/manual/mc-manual.html
 	- Bad Code 10 is the multi-process version of Bad Code 3
 	- Bad Code 11 is the multi-process version of Bad Code 5
+	- Bad Code 12 is the multi-thread version of Bad Code 3
+	- Bad Code 13 is the multi-thread version of Bad Code 5
 
 ## CONCLUSION
 
