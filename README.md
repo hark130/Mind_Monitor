@@ -54,7 +54,7 @@ From the `Mind_Monitor` directory:
 
 NOTES:
 	- Some ideas came from https://valgrind.org/docs/manual/mc-manual.html
-	- Bad Code 10 is the multi-threaded version of Bad Code 3
+	- Bad Code 10 is the multi-process version of Bad Code 3
 
 ## CONCLUSION
 
