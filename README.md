@@ -40,7 +40,7 @@ From the `Mind_Monitor` directory:
 | bad_code7.c  | Overlapping memcpy        | :x::anger:                      | :x:                      | :x:                      | :x:                | :x: |
 | bad_code8.c  | Fishy malloc values       | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
 | bad_code9.c  | Fishy calloc values       | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
-| bad_code10.c | Multi-process memory leak | :heavy_check_mark:              | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
+| bad_code10.c | Multi-process memory leak | :heavy_check_mark::anger:       | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
 | bad_code11.c | Multi-process double free | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x: |
 | bad_code12.c | Multi-thread memory leak  | :grey_question:                 | :grey_question:          | :grey_question:          | :grey_question:    | :grey_question: |
 | bad_code13.c | Multi-thread double free  | :grey_question:                 | :grey_question:          | :grey_question:          | :grey_question:    | :grey_question: |
