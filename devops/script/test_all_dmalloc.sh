@@ -186,7 +186,7 @@ do
         echo -e "\n"$ERRORS_PREFIX" Dmalloc has found an error with "$TEMP_BIN_REL_FILENAME >&2
         echo "Replicate these results with the following commands:"
         echo $DMALLOC_SUMMARIZE_ABS_PATH" < "$TEMP_DMALLOC_REL_LOG_FILENAME >&2
-        echo -e "grep ERROR "$TEMP_DMALLOC_REL_LOG_FILENAME"\n" >&2
+        echo -e "cat "$TEMP_DMALLOC_REL_LOG_FILENAME"\n" >&2
     fi
 done
 

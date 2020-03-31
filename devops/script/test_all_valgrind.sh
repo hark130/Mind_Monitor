@@ -104,7 +104,7 @@ do
     # $TEMP_REL_FILENAME 2>&1 /dev/null
     # B. Silence the valgrind errors
     valgrind -q --leak-check=full --track-origins=yes --tool=memcheck\
-    --child-silent-after-fork=yes --error-exitcode=1\
+    --child-silent-after-fork=yes --error-exitcode=1 --trace-children=yes\
     $TEMP_REL_FILENAME > /dev/null 2>&1
 
     # Check the results
@@ -118,9 +118,9 @@ do
         $FILE_PREFIX$i$FILE_EXT >&2
         echo "Replicate these results with the following command:"
         echo "valgrind -v --leak-check=full --track-origins=yes"\
-        "--tool=memcheck" $TEMP_REL_FILENAME
+        "--tool=memcheck --child-silent-after-fork=yes"\
+        "--trace-children=yes" $TEMP_REL_FILENAME
         echo ""
-        # exit 1
     fi   
 done
 
