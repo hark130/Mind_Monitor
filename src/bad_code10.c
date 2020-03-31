@@ -18,8 +18,11 @@ int execute_child(void);
 int main(void)
 {
     /***********************************************************/
-    /* 10. Multi-Threaded Memory Leak                          */
+    /* 10. Multi-Process Memory Leak                           */
     /***********************************************************/
+    // SETUP
+    setup_mimo();
+
     // LOCAL VARIABLES
     pid_t pid = 0;  // Process IDentifier
 
@@ -29,11 +32,13 @@ int main(void)
     if (pid < 0)
     {
         fprintf(stderr, "PARENT: Failed to fork!\n");
+        teardown_mimo();
         exit(EXIT_FAILURE);  // Error
     }
     else if (pid > 0)
     {
         fprintf(stdout, "PARENT: Fork successful\n");
+        teardown_mimo();
         exit(EXIT_SUCCESS);  // Child process successfully forked
     }
 
