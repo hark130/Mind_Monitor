@@ -28,7 +28,7 @@ void *execute_thread(void);
 int main(void)
 {
     /***********************************************************/
-    /* 10. Multi-Thread Memory Leak                            */
+    /* 13. Multi-Thread Double Free                            */
     /***********************************************************/
     // SETUP
     setup_mimo();
