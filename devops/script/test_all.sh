@@ -1,9 +1,9 @@
 #!/bin/bash
 
 GOOD_START_NUM=1
-GOOD_STOP_NUM=11
+GOOD_STOP_NUM=12
 BAD_START_NUM=1
-BAD_STOP_NUM=11
+BAD_STOP_NUM=12
 
 
 # Purpose - Print an octothorp a certain number of times
