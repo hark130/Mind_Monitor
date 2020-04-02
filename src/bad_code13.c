@@ -11,6 +11,14 @@
 #define NEW_STRING "NEW THREAD"
 
 
+void double_free(char *buf)
+{
+    // PRINT
+    printf("%s", buf);
+    free(buf);
+}
+
+
 /*
  *  Purpose - Encapsulate all the work the new thread will do
  */
@@ -20,7 +28,7 @@ void *execute_thread(void);
 int main(void)
 {
     /***********************************************************/
-    /* 12. Multi-Thread Memory Leak                            */
+    /* 13. Multi-Thread Double Free                            */
     /***********************************************************/
     // SETUP
     setup_mimo();
@@ -61,16 +69,16 @@ void *execute_thread(void)
     setup_mimo();
 
     // LOCAL VARIABLES
-    char *bufLeak = (char *)gimme_mem_malloc((BUF_SIZE * sizeof(char)) + 1);
+    char *bufDbleFree = (char *)gimme_mem_malloc((BUF_SIZE * sizeof(char)) + 1);
 
     // COPY
-    strcpy(bufLeak, "Hello World!\n");
+    strcpy(bufDbleFree, NEW_STRING": Hello World!\n");
 
     // PRINT
-    printf("%s: %s", NEW_STRING, bufLeak);
+    double_free(bufDbleFree);
 
     // CLEAN UP
-    free(bufLeak);
+    free(bufDbleFree);
 
     // DONE
     teardown_mimo();
