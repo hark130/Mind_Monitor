@@ -56,6 +56,7 @@ From the `Mind_Monitor` directory:
 | :x:                | Failed to find the error                   |
 
 NOTES:
+
 	- Some ideas came from https://valgrind.org/docs/manual/mc-manual.html
 	- Bad Code 10 is the multi-process version of Bad Code 3
 	- Bad Code 11 is the multi-process version of Bad Code 5
