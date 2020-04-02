@@ -220,11 +220,19 @@ good12:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)good_code12.o -c $(CODE)good_code12.c
 	$(CC) $(CFLAGS) -o $(DIST)good_code12.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code12.o -pthread
+	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)good_code12_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code12.o -pthread
+	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)good_code12_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)good_code12.c -ldmallocth -pthread
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)good_code12_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)good_code12.c -lefence -pthread
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)good_code12_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)good_code12.c -pthread
 
 bad12:
 	$(MAKE) library
 	$(CC) $(CFLAGS) -o $(DIST)bad_code12.o -c $(CODE)bad_code12.c
 	$(CC) $(CFLAGS) -o $(DIST)bad_code12.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code12.o -pthread
+	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)bad_code12_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code12.o -pthread
+	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)bad_code12_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)bad_code12.c -ldmallocth -pthread
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)bad_code12_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code12.c -lefence -pthread
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code12_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code12.c -pthread
 
 all_good:
 	$(MAKE) good1
