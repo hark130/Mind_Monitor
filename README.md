@@ -43,7 +43,7 @@ From the `Mind_Monitor` directory:
 | bad_code10.c | Multi-process memory leak | :heavy_check_mark::anger:       | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
 | bad_code11.c | Multi-process double free | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x: |
 | bad_code12.c | Multi-thread memory leak  | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
-| bad_code13.c | Multi-thread double free  | :grey_question:                 | :grey_question:          | :grey_question:          | :grey_question:    | :grey_question: |
+| bad_code13.c | Multi-thread double free  | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
 
 **LEGEND**
 
@@ -67,11 +67,11 @@ NOTES:
 
 ### Errors Found
 
-* Dmalloc - 7/12
-* Electric Fence - 3/12
-* Valgrind - 9/12
-* Memwatch - 6/12
-* Mtrace - 3/12
+* Dmalloc - 8/13
+* Electric Fence - 4/13
+* Valgrind - 10/13
+* Memwatch - 7/13
+* Mtrace - 4/13
 
 ### Ease Of Use
 
@@ -97,8 +97,8 @@ On a scale of 1 to 5 (5 being the easiest to read):
 
 Ranked best to worst:
 
-1. Valgrind (71.7%)
-1. Memwatch (70%)
-1. Mtrace (61.7%)
-1. Electric Fence (55%)
-1. Dmalloc (46.1%)
+1. Valgrind (72.3%)
+1. Memwatch (71.3%)
+1. Mtrace (63.6%)
+1. Electric Fence (56.9%)
+1. Dmalloc (47.2%)
