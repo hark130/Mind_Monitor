@@ -265,6 +265,7 @@ all_good:
 	$(MAKE) good10
 	$(MAKE) good11
 	$(MAKE) good12
+	$(MAKE) good13
 
 all_bad:
 	$(MAKE) bad1
@@ -279,6 +280,7 @@ all_bad:
 	$(MAKE) bad10
 	$(MAKE) bad11
 	$(MAKE) bad12
+	$(MAKE) bad13
 
 all:
 	$(MAKE) clean
