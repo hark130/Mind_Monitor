@@ -252,6 +252,24 @@ bad13:
 	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)bad_code13_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code13.c -lefence -pthread
 	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code13_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code13.c -pthread
 
+good14:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code14.o -c $(CODE)good_code14.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code14.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code14.o -pthread
+	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)good_code14_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code14.o -pthread
+	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)good_code14_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)good_code14.c -ldmallocth -pthread
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)good_code14_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)good_code14.c -lefence -pthread
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)good_code14_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)good_code14.c -pthread
+
+bad14:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)bad_code14.o -c $(CODE)bad_code14.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code14.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code14.o -pthread
+	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)bad_code14_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code14.o -pthread
+	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)bad_code14_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)bad_code14.c -ldmallocth -pthread
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)bad_code14_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code14.c -lefence -pthread
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code14_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code14.c -pthread
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
@@ -266,6 +284,7 @@ all_good:
 	$(MAKE) good11
 	$(MAKE) good12
 	$(MAKE) good13
+	$(MAKE) good14
 
 all_bad:
 	$(MAKE) bad1
@@ -281,6 +300,7 @@ all_bad:
 	$(MAKE) bad11
 	$(MAKE) bad12
 	$(MAKE) bad13
+	$(MAKE) bad14
 
 all:
 	$(MAKE) clean
