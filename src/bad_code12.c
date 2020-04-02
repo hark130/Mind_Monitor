@@ -37,7 +37,17 @@ int main(void)
     else
     {
         fprintf(stderr, "%s: Failed to create new thread\n", START_STRING);
-    }    
+    }
+
+    // JOIN THREAD
+    if(!pthread_join(thread_id, NULL))
+    {
+        printf("%s: Successfully joined with the new thread\n", START_STRING);
+    }
+    else
+    {
+        fprintf(stderr, "%s: Failed to join with the new thread\n", START_STRING);
+    }
 
     // DONE
     teardown_mimo();
