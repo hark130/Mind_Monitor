@@ -66,11 +66,11 @@ NOTES:
 
 ### Errors Found
 
-* Dmalloc - 6/11
-* Electric Fence - 3/11
-* Valgrind - 8/11
-* Memwatch - 5/11
-* Mtrace - 2/11
+* Dmalloc - 7/12
+* Electric Fence - 3/12
+* Valgrind - 9/12
+* Memwatch - 6/12
+* Mtrace - 3/12
 
 ### Ease Of Use
 
@@ -96,8 +96,8 @@ On a scale of 1 to 5 (5 being the easiest to read):
 
 Ranked best to worst:
 
-1. Valgrind (70.9%)
-1. Memwatch (68.5%)
-1. Mtrace (59.4%)
-1. Electric Fence (55.8%)
-1. Dmalloc (44.8%)
+1. Valgrind (71.7%)
+1. Memwatch (70%)
+1. Mtrace (61.7%)
+1. Electric Fence (55%)
+1. Dmalloc (46.1%)
