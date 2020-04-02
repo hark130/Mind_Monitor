@@ -29,21 +29,22 @@ From the `Mind_Monitor` directory:
 
 ## TEST RESULTS
 
-| Filename     | Description               | Dmalloc                         | Electric Fence           | Valgrind                 | Memwatch           | Mtrace     |
-| :----------- | :------------------------ | :-----------------------------: | :----------------------: | :----------------------: | :----------------: | :--------: |
-| bad_code1.c  | Uninit. mem               | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x:                | :x: |
-| bad_code2.c  | Buffer overflow           | :heavy_check_mark::anger::boom: | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :x: |
-| bad_code3.c  | Memory leak               | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
-| bad_code4.c  | Invalid mem access        | :x::anger:                      | :x::boom:                | :heavy_check_mark:       | :x:                | :x: |
-| bad_code5.c  | Double free               | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark:       | :heavy_check_mark: | :x: |
-| bad_code6.c  | Uninit. integer           | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x::anger:         | :x: |
-| bad_code7.c  | Overlapping memcpy        | :x::anger:                      | :x:                      | :x:                      | :x:                | :x: |
-| bad_code8.c  | Fishy malloc values       | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
-| bad_code9.c  | Fishy calloc values       | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
-| bad_code10.c | Multi-process memory leak | :heavy_check_mark::anger:       | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
-| bad_code11.c | Multi-process double free | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x: |
-| bad_code12.c | Multi-thread memory leak  | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
-| bad_code13.c | Multi-thread double free  | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
+| Filename     | Description                 | Dmalloc                         | Electric Fence           | Valgrind                 | Memwatch           | Mtrace     |
+| :----------- | :-------------------------- | :-----------------------------: | :----------------------: | :----------------------: | :----------------: | :--------: |
+| bad_code1.c  | Uninit. mem                 | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x:                | :x: |
+| bad_code2.c  | Buffer overflow             | :heavy_check_mark::anger::boom: | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :x: |
+| bad_code3.c  | Memory leak                 | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
+| bad_code4.c  | Invalid mem access          | :x::anger:                      | :x::boom:                | :heavy_check_mark:       | :x:                | :x: |
+| bad_code5.c  | Double free                 | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark:       | :heavy_check_mark: | :x: |
+| bad_code6.c  | Uninit. integer             | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x::anger:         | :x: |
+| bad_code7.c  | Overlapping memcpy          | :x::anger:                      | :x:                      | :x:                      | :x:                | :x: |
+| bad_code8.c  | Fishy malloc values         | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
+| bad_code9.c  | Fishy calloc values         | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :x::boom:          | :x::boom: |
+| bad_code10.c | Multi-process memory leak   | :heavy_check_mark::anger:       | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
+| bad_code11.c | Multi-process double free   | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x: |
+| bad_code12.c | Multi-thread memory leak    | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
+| bad_code13.c | Multi-thread double free    | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |
+| bad_code14.c | Detached thread memory leak | :x::anger:                      | :x:                      | :x::anger:               | :x::anger:         | :x::anger: |
 
 **LEGEND**
 
@@ -62,6 +63,8 @@ NOTES:
 	- Bad Code 11 is the multi-process version of Bad Code 5
 	- Bad Code 12 is the multi-thread version of Bad Code 3
 	- Bad Code 13 is the multi-thread version of Bad Code 5
+	- Bad Code 14 is the detached multi-thread version of Bad Code 3
+	- **IMPORTANT**:heavy_exclamation_mark:  Bad Code 14 is full of failed tests and false positives.  **DO NOT USE**:heavy_exclamation_mark:
 
 ## CONCLUSION
 
