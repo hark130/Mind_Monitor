@@ -57,7 +57,7 @@ fi
 validate_input_not_empty $PARAM_START
 if [ $? -ne 0 ]
 then
-    echo -e "\n"FAILURE_PREFIX"The 'start' parameter is invalid\n" >&2
+    echo -e "\n"$FAILURE_PREFIX"The 'start' parameter is invalid\n" >&2
     exit 1
 fi
 # PARAM_STOP
