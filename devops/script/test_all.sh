@@ -1,9 +1,69 @@
 #!/bin/bash
 
 GOOD_START_NUM=1
-GOOD_STOP_NUM=13
+GOOD_STOP_NUM=2
 BAD_START_NUM=1
-BAD_STOP_NUM=13
+BAD_STOP_NUM=2
+TOTAL_TESTS=0
+SUCCESS_PREFIX="Success: "  # Use this when the test results are favorable
+FAILURE_PREFIX="FAILURE! "  # Use this when some aspect of the shell script errors
+ERRORS_PREFIX="ERRORS! "    # Use this when the test results are not favorable
+TEMP_GOOD_EXIT=0            # Temp variable to hold the exit code for a test_all*.sh good execution
+TEMP_BAD_EXIT=0             # Temp variable to hold the exit code for a test_all*.sh bad execution
+TEMP_RESULTS=""             # Temp results to concatenate into RESULTS
+RESULTS=""                  # Final human-readable results
+
+
+# Purpose - Check the good results
+check_good()
+{
+    # LOCAL VARIABLES
+    CHECK_NAME=$1
+    NUM_FOUND=$2
+    TOTAL=$3
+    ERROR_PHRASE="ERRORS"
+    TEST_PHRASE="TESTS"
+
+    # DO IT
+    if [[ $NUM_FOUND -gt 0 ]]
+    then
+        if [[ $NUM_FOUND -eq 1 ]]
+        then
+            ERROR_PHRASE="ERROR"
+        fi
+        if [[ $TOTAL -eq 1 ]]
+        then
+            TEST_PHRASE="TEST"
+        fi
+        echo "\t$CHECK_NAME FOUND $NUM_FOUND GOOD $ERROR_PHRASE IN $TOTAL $TEST_PHRASE?!\n"
+    else
+        echo
+    fi
+}
+
+
+# Purpose - Check the bad results
+check_bad()
+{
+    # LOCAL VARIABLES
+    CHECK_NAME=$1
+    NUM_FOUND=$2
+    TOTAL=$3
+    ERROR_PHRASE="ERRORS"
+    TEST_PHRASE="TESTS"
+    PREFIX="$SUCCESS_PREFIX"
+
+    # DO IT
+    if [[ $NUM_FOUND -eq 1 ]]
+    then
+        ERROR_PHRASE="ERROR"
+    fi
+    if [[ $TOTAL -eq 1 ]]
+    then
+        TEST_PHRASE="TEST"
+    fi
+    echo "\t$CHECK_NAME FOUND $NUM_FOUND $ERROR_PHRASE IN $TOTAL BAD $TEST_PHRASE\n"
+}
 
 
 # Purpose - Print an octothorp a certain number of times
@@ -45,11 +105,26 @@ print_banner()
     fi
 }
 
+# VALIDATION
+# Range Good
+if [ $GOOD_START_NUM -gt $GOOD_STOP_NUM ]
+then
+    echo -e "\n"$FAILURE_PREFIX"The good 'start' can not be greater than the 'stop'\n" >&2
+    exit 1
+fi
+# Range Bad
+if [ $BAD_START_NUM -gt $BAD_STOP_NUM ]
+then
+    echo -e "\n"$FAILURE_PREFIX"The bad 'start' can not be greater than the 'stop'\n" >&2
+    exit 1
+fi
+TOTAL_GOOD_TESTS=$(($GOOD_STOP_NUM - $GOOD_START_NUM + 1))
+TOTAL_BAD_TESTS=$(($BAD_STOP_NUM - $BAD_START_NUM + 1))
 
 # CHANGE DIRECTORY
 cd "$(dirname "$0")"  # Change directory with respect to this script
 
-# Dependency Checker
+# CHECK DEPENDENCIES
 ./dependency_checker.sh
 if [ $? -ne 0 ]
 then
@@ -58,30 +133,59 @@ then
     exit 1
 fi
 
-# Dmalloc
-print_banner "DMALLOC TESTS"
-./test_all_dmalloc.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-./test_all_dmalloc.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+# # EXECUTE TESTS
+# # Dmalloc
+# print_banner "DMALLOC TESTS"
+# ./test_all_dmalloc.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+# ./test_all_dmalloc.sh bad $BAD_START_NUM $BAD_STOP_NUM
 
-# Electric Fence
-print_banner "ELECTRIC FENCE TESTS"
-./test_all_efence.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-./test_all_efence.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+# # Electric Fence
+# print_banner "ELECTRIC FENCE TESTS"
+# ./test_all_efence.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+# ./test_all_efence.sh bad $BAD_START_NUM $BAD_STOP_NUM
 
-# Valgrind
-print_banner "VALGRIND TESTS"
-./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-./test_all_valgrind.sh bad $BAD_START_NUM $BAD_STOP_NUM
+# # Valgrind
+# print_banner "VALGRIND TESTS"
+# ./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+# ./test_all_valgrind.sh bad $BAD_START_NUM $BAD_STOP_NUM
 
 # Memwatch
 print_banner "MEMWATCH TESTS"
 ./test_all_memwatch.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-./test_all_memwatch.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+TEMP_GOOD_EXIT=$?
+TEMP_RESULTS=$(check_good "MEMWATCH" $TEMP_GOOD_EXIT $TOTAL_GOOD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+./test_all_memwatch.sh bad $BAD_START_NUM $BAD_STOP_NUM
+TEMP_BAD_EXIT=$?
+TEMP_RESULTS=$(check_bad "MEMWATCH" $TEMP_BAD_EXIT $TOTAL_BAD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
 
 # Mtrace
 print_banner "MTRACE TESTS"
 ./test_all_mtrace.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-./test_all_mtrace.sh bad $GOOD_START_NUM $GOOD_STOP_NUM
+TEMP_GOOD_EXIT=$?
+TEMP_RESULTS=$(check_good "MTRACE" $TEMP_GOOD_EXIT $TOTAL_GOOD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+./test_all_mtrace.sh bad $BAD_START_NUM $BAD_STOP_NUM
+TEMP_BAD_EXIT=$?
+TEMP_RESULTS=$(check_bad "MTRACE" $TEMP_BAD_EXIT $TOTAL_BAD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+
+# AddressSanitizer (ASAN)
+print_banner "ADDRESS SANITIZER (ASAN) TESTS"
+./test_all_ASAN.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+TEMP_GOOD_EXIT=$?
+TEMP_RESULTS=$(check_good "ASAN" $TEMP_GOOD_EXIT $TOTAL_GOOD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+./test_all_ASAN.sh bad $BAD_START_NUM $BAD_STOP_NUM
+TEMP_BAD_EXIT=$?
+TEMP_RESULTS=$(check_bad "ASAN" $TEMP_BAD_EXIT $TOTAL_BAD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+
+# SUMMARY
+echo -e "\n"
+print_banner "RESULTS"
+echo -e "$RESULTS"
 
 # DONE
 echo ""
