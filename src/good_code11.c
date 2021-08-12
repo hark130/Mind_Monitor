@@ -1,4 +1,5 @@
 #include <sys/types.h>      // pid_t
+#include <sys/wait.h>       // waitpid()
 #include <stdio.h>          // fprintf()
 #include <stdlib.h>         // exit(), free()
 #include <string.h>         // strcpy()
@@ -32,7 +33,10 @@ int main(void)
     setup_mimo();
 
     // LOCAL VARIABLES
-    pid_t pid = 0;  // Process IDentifier
+    pid_t pid = 0;             // Process IDentifier
+    pid_t wait_ret = 0;        // Return value from waitpid()
+    int status = 0;            // Child PID status information
+    int parent_exit_code = 0;  // Exit code for the child process
 
     // PARENT WORK
     // Fork off the parent process
@@ -40,17 +44,35 @@ int main(void)
     if (pid < 0)
     {
         fprintf(stderr, "PARENT: Failed to fork!\n");
-        teardown_mimo();
-        exit(EXIT_FAILURE);  // Error
+        parent_exit_code = EXIT_FAILURE;  // Error
     }
     else if (pid > 0)
     {
         fprintf(stdout, "PARENT: Fork successful\n");
-        teardown_mimo();
-        exit(EXIT_SUCCESS);  // Child process successfully forked
+        wait_ret = waitpid(pid, &status, 0);
+        if (-1 == wait_ret)
+        {
+            fprintf(stderr, "PARENT: waitpid() failed!\n");
+            parent_exit_code = EXIT_FAILURE;  // Error
+        }
+        else if (wait_ret != pid)
+        {
+            fprintf(stderr, "PARENT: Unexpected return from waitpid()!\n");
+            parent_exit_code = EXIT_FAILURE;  // Error
+        }
+        else if (WIFEXITED(status))
+        {
+            parent_exit_code = WEXITSTATUS(status);
+        }
+    }
+    else
+    {
+        execute_child();
     }
 
-    execute_child();
+    // PARENT CLEAN UP
+    teardown_mimo();
+    exit(parent_exit_code);
 }
 
 
