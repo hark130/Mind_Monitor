@@ -13,6 +13,9 @@
 #       valgrind -q --leak-check=full --track-origins=yes --tool=memcheck \
 #       --error-exitcode=1 dist/[name]_code{start-stop}.bin 2>&1 /dev/null
 #   Validates all input
+# EXIT CODES:
+#   255 on bad input or failure
+#   Otherwise, number of errors found
 
 PARAM_NAME=$1
 PARAM_START=$2
@@ -24,6 +27,7 @@ FILE_EXT=".bin"
 SUCCESS_PREFIX="Success: "
 FAILURE_PREFIX="FAILURE! "
 ERRORS_PREFIX="ERRORS! "
+NUM_ERRORS_FOUND=0
 
 # Purpose - Tests parameter 1 for length 0
 # Return - 1 if empty, 0 if not
@@ -113,6 +117,7 @@ do
         echo $SUCCESS_PREFIX"Valgrind has found 0 errors in"\
         $TEMP_REL_FILENAME
     else
+        NUM_ERRORS_FOUND=$(($NUM_ERRORS_FOUND + 1))
         echo ""
         echo $ERRORS_PREFIX"Valgrind has found an error in"\
         $FILE_PREFIX$i$FILE_EXT >&2
@@ -124,4 +129,4 @@ do
     fi   
 done
 
-exit 0
+exit $NUM_ERRORS_FOUND

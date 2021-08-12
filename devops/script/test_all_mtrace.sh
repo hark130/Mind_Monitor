@@ -12,6 +12,9 @@
 #   Executes mtrace with:
 #       mtrace dist/[name]_code{start-stop}.bin devops/logs/[name]_code{1-3}_mtrace 2>&1 /dev/null
 #   Validates all input
+# EXIT CODES:
+#   255 on bad input or failure
+#   Otherwise, number of errors found
 
 PARAM_NAME=$1
 PARAM_START=$2
@@ -26,6 +29,7 @@ LOG_FILE_EXT=".log"
 SUCCESS_PREFIX="Success: "
 FAILURE_PREFIX="FAILURE! "
 ERRORS_PREFIX="ERRORS! "
+NUM_ERRORS_FOUND=0
 
 # Purpose - Tests parameter 1 for length 0
 # Return - 1 if empty, 0 if not
@@ -45,27 +49,27 @@ validate_input_not_empty $PARAM_NAME
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'name' parameter is invalid\n"
-    exit 1
+    exit 255
 fi
 # PARAM_START
 validate_input_not_empty $PARAM_START
 if [ $? -ne 0 ]
 then
     echo -e "\n"FAILURE_PREFIX"The 'start' parameter is invalid\n"
-    exit 1
+    exit 255
 fi
 # PARAM_STOP
 validate_input_not_empty $PARAM_STOP
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'stop' parameter is invalid\n"
-    exit 1
+    exit 255
 fi
 # Range
 if [ $PARAM_START -gt $PARAM_STOP ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'start' can not be greater than the 'stop'\n"
-    exit 1
+    exit 255
 fi
 
 
@@ -80,7 +84,7 @@ then
     echo -e "\n"$FAILURE_PREFIX"Makefile recipe has failed"
     echo "Replicate these results with the following command:"
     echo -e "make all_"$PARAM_NAME"\n"
-    exit 1
+    exit 255
 fi 
 
 # TEST
@@ -93,7 +97,7 @@ do
     if [ $? -ne 0 ]
     then
         echo -e "\n"$FAILURE_PREFIX$FILE_PREFIX$i$BIN_FILE_EXT" does not exist\n"
-        exit 1
+        exit 255
     fi
 
     # Verify log is removed, thereby guaranteeing a clean slate
@@ -114,7 +118,7 @@ do
     if [ $? -ne 0 ]
     then
         echo -e "\n"$FAILURE_PREFIX" failed to set MALLOC_TRACE environment variable\n"
-        exit 1
+        exit 255
     fi
 
     # Execute the binary
@@ -128,6 +132,7 @@ do
         echo $SUCCESS_PREFIX" Mtrace has found 0 errors in "$TEMP_BIN_FILENAME
     elif [ $RESULTS -eq 1 ]
     then
+        NUM_ERRORS_FOUND=$(($NUM_ERRORS_FOUND + 1))
         echo -e "\n"$ERRORS_PREFIX" Mtrace has found an error in "$TEMP_BIN_FILENAME >&2
         echo "Replicate these results with the following command:"
         echo -e "mtrace "$TEMP_BIN_REL_FILENAME $TEMP_MTRACE_REL_LOG_FILENAME"\n" >&2
@@ -142,8 +147,8 @@ do
         else
             echo -e $SUCCESS_PREFIX" found "$TEMP_MTRACE_LOG_FILENAME"\n"
         fi
-        exit 1
+        exit 255
     fi
 done
 
-exit 0
+exit $NUM_ERRORS_FOUND

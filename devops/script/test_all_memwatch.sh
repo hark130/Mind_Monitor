@@ -13,6 +13,9 @@
 #   Greps the Memwatch log for references to:
 #       - /src/
 #       - Common errors (see: memwatch.h)
+# EXIT CODES:
+#   255 on bad input or failure
+#   Otherwise, number of errors found
 
 PARAM_NAME=$1
 PARAM_START=$2
@@ -31,6 +34,7 @@ SUCCESS_PREFIX="Success: "  # Use this when the test results are favorable
 FAILURE_PREFIX="FAILURE! "  # Use this when some aspect of the shell script errors
 ERRORS_PREFIX="ERRORS! "    # Use this when the test results are not favorable
 MEMWATCH_FAILURE=0          # Indicates Memwatch found an error
+NUM_ERRORS_FOUND=0
 
 
 # Purpose - Tests parameter 1 for length 0
@@ -51,27 +55,27 @@ validate_input_not_empty $PARAM_NAME
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'name' parameter is invalid\n" >&2
-    exit 1
+    exit 255
 fi
 # PARAM_START
 validate_input_not_empty $PARAM_START
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'start' parameter is invalid\n" >&2
-    exit 1
+    exit 255
 fi
 # PARAM_STOP
 validate_input_not_empty $PARAM_STOP
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'stop' parameter is invalid\n" >&2
-    exit 1
+    exit 255
 fi
 # Range
 if [ $PARAM_START -gt $PARAM_STOP ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'start' can not be greater than the 'stop'\n" >&2
-    exit 1
+    exit 255
 fi
 
 
@@ -86,7 +90,7 @@ then
     echo -e "\n"$FAILURE_PREFIX"Makefile recipe has failed" >&2
     echo "Replicate these results with the following command:" >&2
     echo -e "make all_"$PARAM_NAME"\n" >&2
-    exit 1
+    exit 255
 fi 
 
 # TEST
@@ -101,7 +105,7 @@ do
     then
         echo -e "\n"$FAILURE_PREFIX$FILE_PREFIX$i$BIN_FILE_EXT" does not exist\n" >&2
         rm -f $MEMWATCH_REL_LOG_FILENAME > /dev/null 2>&1
-        exit 1
+        exit 255
     fi
 
     # Verify input log is removed, thereby guaranteeing a clean slate
@@ -178,6 +182,8 @@ do
     if [ $MEMWATCH_FAILURE -eq 0 ]
     then
         echo $SUCCESS_PREFIX"Memwatch has found 0 errors in "$TEMP_BIN_REL_FILENAME
+    else
+        NUM_ERRORS_FOUND=$(($NUM_ERRORS_FOUND + 1))
     fi
 
     # Clean up
@@ -192,4 +198,4 @@ do
     fi
 done
 
-exit 0
+exit $NUM_ERRORS_FOUND
