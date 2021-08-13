@@ -80,8 +80,8 @@ NOTES:
 * Electric Fence - 4/13
 * Valgrind - 10/13
 * Memwatch - 7/13
-* Mtrace - 4/13
-* ASAN - ?/13
+* Mtrace - 2/13
+* ASAN - 10/13
 
 ### Ease Of Use
 
@@ -92,7 +92,7 @@ On a scale of 1 to 5 (5 being the easiest to use):
 * Valgrind - 4/5
 * Memwatch - 3/5
 * Mtrace - 3/5
-* ASAN - ?/5
+* ASAN - 5/5
 
 ### Readable Output
 
@@ -103,15 +103,15 @@ On a scale of 1 to 5 (5 being the easiest to read):
 * Valgrind - 3/5
 * Memwatch - 5/5
 * Mtrace - 5/5
-* ASAN - ?/5
+* ASAN - 4/5
 
 ### Final Ranking
 
 Ranked best to worst:
 
+1. ASAN (85.6%)
 1. Valgrind (72.3%)
 1. Memwatch (71.3%)
-1. Mtrace (63.6%)
+1. Mtrace (58.5%)
 1. Electric Fence (56.9%)
 1. Dmalloc (47.2%)
-1. ASAN (??.?%)
