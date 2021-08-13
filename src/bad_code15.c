@@ -27,7 +27,7 @@ int execute_child(void);
 int main(void)
 {
     /***********************************************************/
-    /* 11. Multi-Process Double Free                           */
+    /* 15. Multi-Process Double Free (wait)                    */
     /***********************************************************/
     // SETUP
     setup_mimo();
