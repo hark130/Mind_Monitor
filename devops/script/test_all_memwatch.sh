@@ -91,7 +91,7 @@ then
     echo "Replicate these results with the following command:" >&2
     echo -e "make all_"$PARAM_NAME"\n" >&2
     exit 255
-fi 
+fi
 
 # TEST
 for (( i=$PARAM_START; i<=$PARAM_STOP; i++ ))
@@ -139,7 +139,6 @@ do
         echo -e "\n"$FAILURE_PREFIX" Failed to execute binary" >&2
         echo "Replicate this error with the following command:" >&2
         echo -e $TEMP_BIN_REL_FILENAME"\n" >&2
-        MEMWATCH_FAILURE=1
     else
         # Verify output log exists
         test -f $MEMWATCH_REL_LOG_FILENAME
@@ -150,14 +149,12 @@ do
             echo "rm "$MEMWATCH_REL_LOG_FILENAME >&2
             echo $TEMP_BIN_REL_FILENAME >&2
             echo -e "ls "$MEMWATCH_REL_LOG_FILENAME"\n" >&2
-            MEMWATCH_FAILURE=1
         else
             # Copy the temp log file
             cp $MEMWATCH_REL_LOG_FILENAME $TEMP_MEMWATCH_REL_LOG_FILENAME
             if [ $? -ne 0 ]
             then
                 echo -e "\n"$FAILURE_PREFIX" Failed to copy the memwatch log file\n" >&2
-                MEMWATCH_FAILURE=1
             else
                 # Check the log file
                 for MEMWATCH_ERROR_STRING in "overflow" "underflow" "unfreed" "double-free" "WILD free" "wild pointer" "/src/"
