@@ -46,7 +46,7 @@ From the `Mind_Monitor` directory:
 | bad_code11.c | Multi-process double free        | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x:                       | :x:                       |
 | bad_code12.c | Multi-thread memory leak         | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:        | :heavy_check_mark:        |
 | bad_code13.c | Multi-thread double free         | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x::boom:                 | :heavy_check_mark:        |
-| bad_code14.c | Multi-process memory leak (wait) |  |  |  |  |  |  |
+| bad_code14.c | Multi-process memory leak (wait) | :heavy_check_mark:              | :x:                      | :x:                      | :heavy_check_mark: | :x:                       | :x:                       |
 | bad_code15.c | Multi-process double free (wait) | :x:                             | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x:                       | :heavy_check_mark:        |
 
 
@@ -76,12 +76,12 @@ NOTES:
 
 ### Errors Found
 
-* Dmalloc - 8/14
-* Electric Fence - 5/14
-* Valgrind - 11/14
-* Memwatch - 8/14
-* Mtrace - 2.5/14
-* ASAN - 11/14
+* Dmalloc - 9/15
+* Electric Fence - 5/15
+* Valgrind - 11/15
+* Memwatch - 9/15
+* Mtrace - 2.5/15
+* ASAN - 11/15
 
 NOTE: Mtrace has seemingly non-deterministic results for Bad Code 10 so it gets a :angry: and a half point
 
@@ -111,9 +111,9 @@ On a scale of 1 to 5 (5 being the easiest to read):
 
 Ranked best to worst:
 
-1. ASAN (86.2%)
-1. Valgrind (72.9%)
-1. Memwatch (72.4%)
-1. Mtrace (59.3%)
-1. Electric Fence (58.6%)
-1. Dmalloc (45.7%)
+1. ASAN (84.4%)
+1. Memwatch (73.3%)
+1. Valgrind (71.1%)
+1. Mtrace (58.9%)
+1. Electric Fence (57.8%)
+1. Dmalloc (46.7%)
