@@ -47,7 +47,7 @@ From the `Mind_Monitor` directory:
 | bad_code12.c | Multi-thread memory leak         | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:        |
 | bad_code13.c | Multi-thread double free         | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x::boom:          | :heavy_check_mark:        |
 | bad_code14.c | Multi-process memory leak (wait) |  |  |  |  |  |  |
-| bad_code15.c | Multi-process double free (wait) |  |  |  |  |  |  |
+| bad_code15.c | Multi-process double free (wait) |  |  |  |  |  |  | 
 
 
 
