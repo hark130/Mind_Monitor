@@ -25,7 +25,10 @@ check_good()
     TEST_PHRASE="TESTS"
 
     # DO IT
-    if [[ $NUM_FOUND -gt 0 ]]
+    if [[ $NUM_FOUND -eq 255 ]]
+    then
+        echo "\t$CHECK_NAME ENCOUNTERED BAD INPUT AND/OR FAILURES!!\n"
+    elif [[ $NUM_FOUND -gt 0 ]]
     then
         if [[ $NUM_FOUND -eq 1 ]]
         then
@@ -51,7 +54,12 @@ check_bad()
     TOTAL=$3
 
     # DO IT
-    echo "\t$CHECK_NAME FOUND $NUM_FOUND OF $TOTAL TOTAL ERRORS\n"
+    if [[ $NUM_FOUND -eq 255 ]]
+    then
+        echo "\t$CHECK_NAME ENCOUNTERED BAD INPUT AND/OR FAILURES!!\n"
+    else
+        echo "\t$CHECK_NAME FOUND $NUM_FOUND OF $TOTAL TOTAL ERRORS\n"
+    fi
 }
 
 
