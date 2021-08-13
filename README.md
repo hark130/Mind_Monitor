@@ -43,9 +43,9 @@ From the `Mind_Monitor` directory:
 | bad_code8.c  | Fishy malloc values              | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark::boom: | :x::boom:          | :x::boom:          | :heavy_check_mark:        |
 | bad_code9.c  | Fishy calloc values              | :heavy_check_mark::anger::boom: | :x::boom:                | :heavy_check_mark::boom: | :x::boom:          | :x::boom:          | :heavy_check_mark:        |
 | bad_code10.c | Multi-process memory leak        | :heavy_check_mark::anger:       | :x:                      | :x:                      | :heavy_check_mark: | :heavy_check_mark: | :x:                       |
-| bad_code11.c | Multi-process double free        | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x:                |      |
-| bad_code12.c | Multi-thread memory leak         | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |      |
-| bad_code13.c | Multi-thread double free         | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: |      |
+| bad_code11.c | Multi-process double free        | :x::anger:                      | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x:                | :x:                       |
+| bad_code12.c | Multi-thread memory leak         | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:        |
+| bad_code13.c | Multi-thread double free         | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x::boom:          | :heavy_check_mark:        |
 | bad_code14.c | Multi-process memory leak (wait) |  |  |  |  |  |  |
 | bad_code15.c | Multi-process double free (wait) |  |  |  |  |  |  |
 
@@ -70,6 +70,7 @@ NOTES:
 	- Bad Code 13 is the multi-thread version of Bad Code 5
 	- Bad Code 14 is Bad Code 10 with waitpid() implemented
 	- Bad Code 15 is Bad Code 11 with waitpid() implemented
+	- Turns out Mtrace's response to Bad Code 13 isn't anything above and beyond normal execution
 
 ## CONCLUSION
 
