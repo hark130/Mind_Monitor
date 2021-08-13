@@ -47,27 +47,27 @@ validate_input_not_empty $PARAM_NAME
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'name' parameter is invalid\n" >&2
-    exit 1
+    exit 255
 fi
 # PARAM_START
 validate_input_not_empty $PARAM_START
 if [ $? -ne 0 ]
 then
     echo -e "\n"FAILURE_PREFIX"The 'start' parameter is invalid\n" >&2
-    exit 1
+    exit 255
 fi
 # PARAM_STOP
 validate_input_not_empty $PARAM_STOP
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'stop' parameter is invalid\n" >&2
-    exit 1
+    exit 255
 fi
 # Range
 if [ $PARAM_START -gt $PARAM_STOP ]
 then
     echo -e "\n"$FAILURE_PREFIX"The 'start' can not be greater than the 'stop'\n" >&2
-    exit 1
+    exit 255
 fi
 
 
@@ -84,7 +84,7 @@ then
     echo "Replicate these results with the following command:" >&2
     echo "make all_"$PARAM_NAME >&2
     echo ""
-    exit 1
+    exit 255
 fi
 
 # TEST
@@ -98,7 +98,7 @@ do
         echo ""
         echo $FAILURE_PREFIX$FILE_PREFIX$i$FILE_EXT" does not exist" >&2
         echo ""
-        exit 1
+        exit 255
     fi
 
     # Execute valgrind
