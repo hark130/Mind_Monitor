@@ -34,7 +34,7 @@ From the `Mind_Monitor` directory:
 | Filename     | Description                      | Dmalloc                         | Electric Fence           | Valgrind                 | Memwatch           | Mtrace                    | ASAN                      |
 | :----------- | :------------------------------- | :-----------------------------: | :----------------------: | :----------------------: | :----------------: | :-----------------------: | :-----------------------: |
 | bad_code1.c  | Uninit. mem                      | :x::anger:                      | :x:                      | :heavy_check_mark:       | :x:                | :x:                       | :heavy_check_mark::anger: |
-| bad_code2.c  | Buffer overflow                  | :heavy_check_mark::anger::boom: | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :x:                       | :heavy_check_mark:        |
+| bad_code2.c  | Buffer overflow (Heap)           | :heavy_check_mark::anger::boom: | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :x:                       | :heavy_check_mark:        |
 | bad_code3.c  | Memory leak                      | :heavy_check_mark::anger:       | :x:                      | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:        | :heavy_check_mark:        |
 | bad_code4.c  | Invalid mem access               | :x::anger:                      | :x::boom:                | :heavy_check_mark:       | :x:                | :x:                       | :heavy_check_mark:        |
 | bad_code5.c  | Double free                      | :heavy_check_mark::anger::boom: | :heavy_check_mark::boom: | :heavy_check_mark:       | :heavy_check_mark: | :x:                       | :heavy_check_mark:        |
@@ -48,8 +48,7 @@ From the `Mind_Monitor` directory:
 | bad_code13.c | Multi-thread double free         | :heavy_check_mark::anger:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x::boom:                 | :heavy_check_mark:        |
 | bad_code14.c | Multi-process memory leak (wait) | :heavy_check_mark:              | :x:                      | :x:                      | :heavy_check_mark: | :x:                       | :x:                       |
 | bad_code15.c | Multi-process double free (wait) | :x:                             | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x:                       | :heavy_check_mark:        |
-
-
+| bad_code16.c | Buffer overflow (Stack)          | :x:                             | :x:                      | :x:                      | :x:                | :x:                       | :heavy_check_mark:        |
 
 **LEGEND**
 
@@ -76,12 +75,12 @@ NOTES:
 
 ### Errors Found
 
-* Dmalloc - 9/15
-* Electric Fence - 5/15
-* Valgrind - 11/15
-* Memwatch - 9/15
-* Mtrace - 2.5/15
-* ASAN - 11/15
+* Dmalloc - 9/16
+* Electric Fence - 5/16
+* Valgrind - 11/16
+* Memwatch - 9/16
+* Mtrace - 2.5/16
+* ASAN - 12/16
 
 NOTE: Mtrace has seemingly non-deterministic results for Bad Code 10 so it gets a :angry: and a half point
 
@@ -111,9 +110,9 @@ On a scale of 1 to 5 (5 being the easiest to read):
 
 Ranked best to worst:
 
-1. ASAN (84.4%)
-1. Memwatch (73.3%)
-1. Valgrind (71.1%)
-1. Mtrace (58.9%)
-1. Electric Fence (57.8%)
-1. Dmalloc (46.7%)
+1. ASAN (85.0%)
+1. Memwatch (72.1%)
+1. Valgrind (69.6%)
+1. Mtrace (58.5%)
+1. Electric Fence (57.1%)
+1. Dmalloc (45.4%)

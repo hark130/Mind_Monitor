@@ -320,6 +320,29 @@ bad15:
 	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)bad_code15_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code15.c
 	$(CC) $(CFLAGS) $(ASAN_FLAGS) -o $(DIST)bad_code15_ASAN.bin $(CODE)gimme_mem.c $(CODE)mimo_wrappers.c $(CODE)bad_code15.c
 
+good16:
+	$(MAKE) library
+	$(CC) $(CFLAGS) -o $(DIST)good_code16.o -c $(CODE)good_code16.c
+	$(CC) $(CFLAGS) -o $(DIST)good_code16.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)good_code16.o
+	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)good_code16_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)good_code16.o
+	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)good_code16_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)good_code16.c -ldmallocth
+	$(CC) $(CFLAGS) $(EFENCE_FLAGS) -o $(DIST)good_code16_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)good_code16.c -lefence
+	$(CC) $(CFLAGS) $(MEMWATCH_FLAGS) -o $(DIST)good_code16_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)good_code16.c
+	$(CC) $(CFLAGS) $(ASAN_FLAGS) -o $(DIST)good_code16_ASAN.bin $(CODE)gimme_mem.c $(CODE)mimo_wrappers.c $(CODE)good_code16.c
+
+bad16:
+	$(MAKE) library
+	# Disabling a specific warning to quietly circumvent the bad code
+	$(CC) $(CFLAGS) -Wstringop-overflow=0 -o $(DIST)bad_code16.o -c $(CODE)bad_code16.c
+	$(CC) $(CFLAGS) -o $(DIST)bad_code16.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(DIST)bad_code16.o
+	$(CC) $(CFLAGS) $(MTRACE_FLAGS) -o $(DIST)bad_code16_mtrace.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers_mtrace.o $(DIST)bad_code16.o
+	$(CC) $(CFLAGS) $(DMALLOC_FLAGS) -o $(DIST)bad_code16_dmalloc.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers_dmalloc.o $(CODE)bad_code16.c -ldmallocth
+	# Disabling a specific warning to quietly circumvent the bad code
+	$(CC) $(CFLAGS) -Wstringop-overflow=0 $(EFENCE_FLAGS) -o $(DIST)bad_code16_efence.bin $(DIST)gimme_mem.o $(DIST)mimo_wrappers.o $(CODE)bad_code16.c -lefence
+	# Disabling a specific warning to quietly circumvent the bad code
+	$(CC) $(CFLAGS) -Wstringop-overflow=0 $(MEMWATCH_FLAGS) -o $(DIST)bad_code16_memwatch.bin $(CODE)gimme_mem.c $(DIST)mimo_wrappers.o $(DIST)memwatch.o $(CODE)bad_code16.c
+	$(CC) $(CFLAGS) $(ASAN_FLAGS) -o $(DIST)bad_code16_ASAN.bin $(CODE)gimme_mem.c $(CODE)mimo_wrappers.c $(CODE)bad_code16.c
+
 all_good:
 	$(MAKE) good1
 	$(MAKE) good2
@@ -336,6 +359,7 @@ all_good:
 	$(MAKE) good13
 	$(MAKE) good14
 	$(MAKE) good15
+	$(MAKE) good16
 
 all_bad:
 	$(MAKE) bad1
@@ -353,6 +377,7 @@ all_bad:
 	$(MAKE) bad13
 	$(MAKE) bad14
 	$(MAKE) bad15
+	$(MAKE) bad16
 
 all:
 	$(MAKE) clean
