@@ -76,12 +76,12 @@ NOTES:
 
 ### Errors Found
 
-* Dmalloc - 8/13
-* Electric Fence - 4/13
-* Valgrind - 10/13
-* Memwatch - 7/13
-* Mtrace - 2.5/13
-* ASAN - 10/13
+* Dmalloc - 8/14
+* Electric Fence - 5/14
+* Valgrind - 11/14
+* Memwatch - 8/14
+* Mtrace - 2.5/14
+* ASAN - 11/14
 
 NOTE: Mtrace has seemingly non-deterministic results for Bad Code 10 so it gets a :angry: and a half point
 
@@ -111,9 +111,9 @@ On a scale of 1 to 5 (5 being the easiest to read):
 
 Ranked best to worst:
 
-1. ASAN (85.6%)
-1. Valgrind (72.3%)
-1. Memwatch (71.3%)
-1. Mtrace (59.7%)
-1. Electric Fence (56.9%)
-1. Dmalloc (47.2%)
+1. ASAN (86.2%)
+1. Valgrind (72.9%)
+1. Memwatch (72.4%)
+1. Mtrace (59.3%)
+1. Electric Fence (58.6%)
+1. Dmalloc (45.7%)
