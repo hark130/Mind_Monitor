@@ -27,6 +27,9 @@
 #   I search the Perl script output for mentions of the directory I store my
 #   source code in.  I also grep the log file for "ERROR".  That's about as
 #   much use as I can squeeze out of Dmalloc.
+# EXIT CODES:
+#   255 on bad input or failure
+#   Otherwise, number of errors found
 
 PARAM_NAME=$1
 PARAM_START=$2
@@ -45,6 +48,7 @@ DMALLOC_SUMMARIZE_PATH="/usr/share/doc/libdmalloc-dev/examples/contrib/"
 DMALLOC_SUMMARIZE_FILE="dmalloc_summarize.pl"
 DMALLOC_SUMMARIZE_ABS_PATH=$DMALLOC_SUMMARIZE_PATH$DMALLOC_SUMMARIZE_FILE
 DMALLOC_FAILURE=0           # Indicates Dmalloc found an error
+NUM_ERRORS_FOUND=0
 
 # Purpose - Tests parameter 1 for length 0
 # Return - 1 if empty, 0 if not
@@ -64,27 +68,27 @@ validate_input_not_empty $PARAM_NAME
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX" The 'name' parameter is invalid\n"
-    exit 1
+    exit 255
 fi
 # PARAM_START
 validate_input_not_empty $PARAM_START
 if [ $? -ne 0 ]
 then
     echo -e "\n"FAILURE_PREFIX" The 'start' parameter is invalid\n"
-    exit 1
+    exit 255
 fi
 # PARAM_STOP
 validate_input_not_empty $PARAM_STOP
 if [ $? -ne 0 ]
 then
     echo -e "\n"$FAILURE_PREFIX" The 'stop' parameter is invalid\n"
-    exit 1
+    exit 255
 fi
 # Range
 if [ $PARAM_START -gt $PARAM_STOP ]
 then
     echo -e "\n"$FAILURE_PREFIX" The 'start' can not be greater than the 'stop'\n"
-    exit 1
+    exit 255
 fi
 # dmalloc_summarize.pl
 test -f $DMALLOC_SUMMARIZE_ABS_PATH
@@ -93,7 +97,7 @@ then
     echo -e "\n"$FAILURE_PREFIX" Failed to find"$DMALLOC_SUMMARIZE_FILE
     echo "Attempt to find it with the following command:"
     echo -e "   find / -iname "$DMALLOC_SUMMARIZE_FILE"\n"
-    exit 1
+    exit 255
 fi
 
 # CHANGE DIRECTORY
@@ -107,7 +111,7 @@ then
     echo -e "\n"$FAILURE_PREFIX" Makefile recipe has failed"
     echo "Replicate these results with the following command:"
     echo -e "make all_"$PARAM_NAME"\n"
-    exit 1
+    exit 255
 fi 
 
 # TEST
@@ -121,7 +125,7 @@ do
     if [ $? -ne 0 ]
     then
         echo -e "\n"$FAILURE_PREFIX $TEMP_BIN_FILENAME" does not exist\n"
-        exit 1
+        exit 255
     fi
 
     # Verify log is removed, thereby guaranteeing a clean slate
@@ -142,7 +146,7 @@ do
     if [ $? -ne 0 ]
     then
         echo -e "\n"$FAILURE_PREFIX" Failed to set DMALLOC_OPTIONS environment variable\n"
-        exit 1
+        exit 255
     fi
 
     # Execute the binary
@@ -183,6 +187,7 @@ do
     then
         echo $SUCCESS_PREFIX"Dmalloc has found 0 errors in "$TEMP_BIN_REL_FILENAME
     else
+        NUM_ERRORS_FOUND=$(($NUM_ERRORS_FOUND + 1))
         echo -e "\n"$ERRORS_PREFIX" Dmalloc has found an error with "$TEMP_BIN_REL_FILENAME >&2
         echo "Replicate these results with the following commands:"
         echo $DMALLOC_SUMMARIZE_ABS_PATH" < "$TEMP_DMALLOC_REL_LOG_FILENAME >&2
@@ -190,4 +195,4 @@ do
     fi
 done
 
-exit 0
+exit $NUM_ERRORS_FOUND
