@@ -93,7 +93,7 @@ then
     echo "Replicate these results with the following command:" >&2
     echo -e "make all_"$PARAM_NAME"\n" >&2
     exit 255
-fi 
+fi
 
 # TEST
 for (( i=$PARAM_START; i<=$PARAM_STOP; i++ ))
