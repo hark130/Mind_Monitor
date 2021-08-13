@@ -1,10 +1,10 @@
 #!/bin/bash
 
-GOOD_START_NUM=1
-GOOD_STOP_NUM=2
-BAD_START_NUM=1
-BAD_STOP_NUM=2
-TOTAL_TESTS=0
+GOOD_START_NUM=10
+GOOD_STOP_NUM=10
+BAD_START_NUM=10
+BAD_STOP_NUM=10
+TOTAL_TESTS=10
 SUCCESS_PREFIX="Success: "  # Use this when the test results are favorable
 FAILURE_PREFIX="FAILURE! "  # Use this when some aspect of the shell script errors
 ERRORS_PREFIX="ERRORS! "    # Use this when the test results are not favorable
@@ -49,20 +49,9 @@ check_bad()
     CHECK_NAME=$1
     NUM_FOUND=$2
     TOTAL=$3
-    ERROR_PHRASE="ERRORS"
-    TEST_PHRASE="TESTS"
-    PREFIX="$SUCCESS_PREFIX"
 
     # DO IT
-    if [[ $NUM_FOUND -eq 1 ]]
-    then
-        ERROR_PHRASE="ERROR"
-    fi
-    if [[ $TOTAL -eq 1 ]]
-    then
-        TEST_PHRASE="TEST"
-    fi
-    echo "\t$CHECK_NAME FOUND $NUM_FOUND $ERROR_PHRASE IN $TOTAL BAD $TEST_PHRASE\n"
+    echo "\t$CHECK_NAME FOUND $NUM_FOUND OF $TOTAL TOTAL ERRORS\n"
 }
 
 
@@ -133,21 +122,39 @@ then
     exit 1
 fi
 
-# # EXECUTE TESTS
-# # Dmalloc
-# print_banner "DMALLOC TESTS"
-# ./test_all_dmalloc.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-# ./test_all_dmalloc.sh bad $BAD_START_NUM $BAD_STOP_NUM
+# EXECUTE TESTS
+# Dmalloc
+print_banner "DMALLOC TESTS"
+./test_all_dmalloc.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+TEMP_GOOD_EXIT=$?
+TEMP_RESULTS=$(check_good "DMALLOC" $TEMP_GOOD_EXIT $TOTAL_GOOD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+./test_all_dmalloc.sh bad $BAD_START_NUM $BAD_STOP_NUM
+TEMP_BAD_EXIT=$?
+TEMP_RESULTS=$(check_bad "DMALLOC" $TEMP_BAD_EXIT $TOTAL_BAD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
 
-# # Electric Fence
-# print_banner "ELECTRIC FENCE TESTS"
-# ./test_all_efence.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-# ./test_all_efence.sh bad $BAD_START_NUM $BAD_STOP_NUM
+# Electric Fence
+print_banner "ELECTRIC FENCE TESTS"
+./test_all_efence.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+TEMP_GOOD_EXIT=$?
+TEMP_RESULTS=$(check_good "ELECTRIC FENCE" $TEMP_GOOD_EXIT $TOTAL_GOOD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+./test_all_efence.sh bad $BAD_START_NUM $BAD_STOP_NUM
+TEMP_BAD_EXIT=$?
+TEMP_RESULTS=$(check_bad "ELECTRIC FENCE" $TEMP_BAD_EXIT $TOTAL_BAD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
 
-# # Valgrind
-# print_banner "VALGRIND TESTS"
-# ./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
-# ./test_all_valgrind.sh bad $BAD_START_NUM $BAD_STOP_NUM
+# Valgrind
+print_banner "VALGRIND TESTS"
+./test_all_valgrind.sh good $GOOD_START_NUM $GOOD_STOP_NUM
+TEMP_GOOD_EXIT=$?
+TEMP_RESULTS=$(check_good "VALGRIND" $TEMP_GOOD_EXIT $TOTAL_GOOD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
+./test_all_valgrind.sh bad $BAD_START_NUM $BAD_STOP_NUM
+TEMP_BAD_EXIT=$?
+TEMP_RESULTS=$(check_bad "VALGRIND" $TEMP_BAD_EXIT $TOTAL_BAD_TESTS)
+RESULTS="$RESULTS$TEMP_RESULTS"
 
 # Memwatch
 print_banner "MEMWATCH TESTS"
