@@ -1,9 +1,9 @@
 #!/bin/bash
 
-GOOD_START_NUM=10
-GOOD_STOP_NUM=10
-BAD_START_NUM=10
-BAD_STOP_NUM=10
+GOOD_START_NUM=1
+GOOD_STOP_NUM=13
+BAD_START_NUM=1
+BAD_STOP_NUM=13
 TOTAL_TESTS=10
 SUCCESS_PREFIX="Success: "  # Use this when the test results are favorable
 FAILURE_PREFIX="FAILURE! "  # Use this when some aspect of the shell script errors
