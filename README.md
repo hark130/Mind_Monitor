@@ -70,6 +70,8 @@ NOTES:
 	- Bad Code 14 is Bad Code 10 with waitpid() implemented
 	- Bad Code 15 is Bad Code 11 with waitpid() implemented
 	- Turns out Mtrace's response to Bad Code 13 isn't anything above and beyond normal execution
+	- Bad Code 16 borrowed heavily from Bad Code 2
+	- *_code6_memwatch.bin and *_code16_memwatch.bin are failing to create a log file at runtime.  Theory: "...memwatch will auto-initialize on the first call to a memory function..." and neither test case calls a memory function.  I verified the binaries were linked against memwatch (e.g., `readelf -a *_code6_memwatch.bin | grep mw`).  I even tried to manually initialize memwatch with `mwInit()`, `mwDoFlush(1)`, and `mwTerm()`.
 
 ## CONCLUSION
 
