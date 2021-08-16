@@ -84,7 +84,7 @@ NOTES:
 * Mtrace - 2.5/16
 * ASAN - 12/16
 
-NOTE: Mtrace has seemingly non-deterministic results for Bad Code 10 so it gets a :angry: and a half point
+NOTE: Mtrace has seemingly non-deterministic results for Bad Code 10 so it gets a :anger: and a half point
 
 ### Ease Of Use
 
