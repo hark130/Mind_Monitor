@@ -4,13 +4,11 @@
 #   name - The name of the tests to run (e.g., good, bad)
 #   start - Lowest numbered filename
 #   stop - Highest numbered filename
-# USAGE: test_all_mtrace.sh [type] [start] [stop]
-# EXAMPLE: test_all_mtrace.sh good 1 3  # Runs mtrace on good_code{1-3}_mtrace.bin
+# USAGE: test_all_ASAN.sh [type] [start] [stop]
+# EXAMPLE: test_all_ASAN.sh good 1 3  # Runs mtrace on good_code{1-3}_mtrace.bin
 # NOTES:
 #   Executes in the following order:
 #       make all_[name]; dist/[name]_code{1-3}_mtrace.bin; mtrace dist/[name]_code{1-3}_mtrace.bin devops/logs/[name]_code{1-3}_mtrace
-#   Executes mtrace with:
-#       mtrace dist/[name]_code{start-stop}.bin devops/logs/[name]_code{1-3}_mtrace 2>&1 /dev/null
 #   Validates all input
 # EXIT CODES:
 #   255 on bad input or failure
@@ -23,7 +21,7 @@ PARAM_STOP=$3
 DIST_DIRECTORY="dist/"
 MTRACE_LOG_DIRECTORY="devops/logs/"
 FILE_PREFIX=$PARAM_NAME"_code"
-TOOL_SUFFIX="_mtrace"
+TOOL_SUFFIX="_ASAN"
 BIN_FILE_EXT=".bin"
 LOG_FILE_EXT=".log"
 SUCCESS_PREFIX="Success: "
@@ -100,53 +98,23 @@ do
         exit 255
     fi
 
-    # Verify log is removed, thereby guaranteeing a clean slate
-    TEMP_MTRACE_LOG_FILENAME=$FILE_PREFIX$i$TOOL_SUFFIX$LOG_FILE_EXT
-    TEMP_MTRACE_REL_LOG_FILENAME=$MTRACE_LOG_DIRECTORY$TEMP_MTRACE_LOG_FILENAME
-    test -f $TEMP_MTRACE_REL_LOG_FILENAME
-    if [ $? -eq 0 ]
-    then
-        rm -f $TEMP_MTRACE_REL_LOG_FILENAME
-        if [ $? -ne 0 ]
-        then
-            echo -e "\n"$FAILURE_PREFIX" failed to delete"$TEMP_MTRACE_REL_LOG_FILENAME
-        fi
-    fi
-
-    # Set the environment variable
-    export MALLOC_TRACE=$TEMP_MTRACE_REL_LOG_FILENAME
-    if [ $? -ne 0 ]
-    then
-        echo -e "\n"$FAILURE_PREFIX" failed to set MALLOC_TRACE environment variable\n"
-        exit 255
-    fi
-
     # Execute the binary
-    $TEMP_BIN_REL_FILENAME > /dev/null 2>&1
+    # TEMP_ERROR=$($TEMP_BIN_REL_FILENAME)
+    TEMP_ERROR=$($TEMP_BIN_REL_FILENAME > /dev/null 2>&1)
+    TEMP_EXIT_CODE=$?
 
-    # Execute mtrace
-    mtrace $TEMP_BIN_REL_FILENAME $TEMP_MTRACE_REL_LOG_FILENAME > /dev/null 2>&1
-    RESULTS=$?
-    if [ $RESULTS -eq 0 ]
+    # Evaluate results
+    if [ $TEMP_EXIT_CODE -eq 0 ]
     then
-        echo $SUCCESS_PREFIX" Mtrace has found 0 errors in "$TEMP_BIN_FILENAME
-    elif [ $RESULTS -eq 1 ]
+        echo $SUCCESS_PREFIX" AddressSanitizer (ASAN) has found 0 errors in "$TEMP_BIN_FILENAME
+    elif [ $TEMP_EXIT_CODE -eq 1 ]
     then
         NUM_ERRORS_FOUND=$(($NUM_ERRORS_FOUND + 1))
-        echo -e "\n"$ERRORS_PREFIX" Mtrace has found an error in "$TEMP_BIN_FILENAME >&2
-        echo "Replicate these results with the following command:"
-        echo -e "mtrace "$TEMP_BIN_REL_FILENAME $TEMP_MTRACE_REL_LOG_FILENAME"\n" >&2
+        echo -e "\n"$ERRORS_PREFIX" AddressSanitizer (ASAN) has found an error in "$TEMP_BIN_FILENAME >&2
+        echo "Replicate these results with the following command:" >&2
+        echo -e "$TEMP_BIN_REL_FILENAME\n" >&2
     else
-        echo -e "\n"$FAILURE_PREFIX" Mtrace has failed"
-        # Verify mtrace log was created
-        test -f $TEMP_MTRACE_REL_LOG_FILENAME
-        if [ $? -ne 0 ]
-        then
-            echo -e $FAILURE_PREFIX" Failed to find "$TEMP_MTRACE_REL_LOG_FILENAME
-            echo -e "Did you neglect to compile your code with the MIMO Wrappers?\n"
-        else
-            echo -e $SUCCESS_PREFIX" found "$TEMP_MTRACE_LOG_FILENAME"\n"
-        fi
+        echo -e "\n"$FAILURE_PREFIX" AddressSanitizer (ASAN) has failed" >&2
         exit 255
     fi
 done

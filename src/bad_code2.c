@@ -10,7 +10,7 @@
 int main(void)
 {
     /***********************************************************/
-    /* 2. Invalid write of size 1 (OVERFLOW)                   */
+    /* 2. Invalid write of size 1 (HEAP OVERFLOW)              */
     /***********************************************************/
     // SETUP
     setup_mimo();
