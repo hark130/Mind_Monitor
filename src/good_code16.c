@@ -10,23 +10,19 @@
 int main(void)
 {
     /***********************************************************/
-    /* 2. Invalid write of size 1 (HEAP OVERFLOW)              */
+    /* 16. Invalid write of size 1 (STACK OVERFLOW)            */
     /***********************************************************/
     // SETUP
     setup_mimo();
 
     // LOCAL VARIABLES
-    char strLiteral[] = {"Hello World!\n"};
-    char *bufOverwrite = (char *)gimme_mem_malloc(sizeof(strLiteral));
+    char bufOverwrite[BUF_SIZE + 1] = {0};
 
     // COPY
-    strcpy(bufOverwrite, strLiteral);
+    strcpy(bufOverwrite, "Hello World!\n");
 
     // PRINT
     printf("%s", bufOverwrite);
-
-    // CLEAN UP
-    free(bufOverwrite);
 
     // DONE
     teardown_mimo();

@@ -10,7 +10,7 @@ print_line()
     LINE_CHAR="#"
 
     # INPUT VALIDATION
-    if [ ${#LINE_LEN} -gt 0 ]
+    if [[ ${#LINE_LEN} -gt 0 ]]
     then
         for (( i=0; i<($LINE_LEN+4); i++ ))
         do
@@ -29,7 +29,7 @@ print_banner()
     LINE_CHAR="#"
 
     # INPUT VALIDATION
-    if [ ${#1} -gt 0 ]
+    if [[ ${#1} -gt 0 ]]
     then
         BANNER_WIDTH=${#1}
         echo ""
@@ -52,18 +52,19 @@ DMALLOC_SUMMARIZE_FILE="dmalloc_summarize.pl"
 DMALLOC_SUMMARIZE_ABS_PATH=$DMALLOC_SUMMARIZE_PATH$DMALLOC_SUMMARIZE_FILE
 RESULT_ONE=0    # Use this for checking two command results at once
 RESULT_TWO=0    # Use this for checking two command results at once
+TEMP_ERROR=""   # Temp variable to store stderr
 
 # CHECK DEPENDENCIES
 print_banner "CHECKING DEPENDENCIES"
 
 # Dmalloc
 dmalloc --version > /dev/null 2>&1
-if [ $? -eq 0 ]
+if [[ $? -eq 0 ]]
 then
     echo "[✓] Dmalloc"
     # dmalloc_summarize.pl
     test -f $DMALLOC_SUMMARIZE_ABS_PATH
-    if [ $? -ne 0 ]
+    if [[ $? -ne 0 ]]
     then
         echo "[ ] Dmalloc's "$DMALLOC_SUMMARIZE_FILE
         echo -e "  Failed to find"$DMALLOC_SUMMARIZE_FILE
@@ -82,7 +83,7 @@ fi
 
 # Electric Fence
 dpkg-query --list electric-fence > /dev/null 2>&1
-if [ $? -eq 0 ]
+if [[ $? -eq 0 ]]
 then
     echo "[✓] Electric Fence"
 else
@@ -98,7 +99,7 @@ fi
 
 # Memcheck (AKA Valgrind)
 valgrind --version > /dev/null 2>&1
-if [ $? -eq 0 ]
+if [[ $? -eq 0 ]]
 then
     echo "[✓] Valgrind"
 else
@@ -115,7 +116,7 @@ ls src/memwatch.h > /dev/null 2>&1
 RESULT_ONE=$?
 ls src/memwatch.c > /dev/null 2>&1
 RESULT_TWO=$?
-if [ $RESULT_ONE -eq 0 ] && [ $RESULT_TWO -eq 0 ]
+if [[ $RESULT_ONE -eq 0 ]] && [[ $RESULT_TWO -eq 0 ]]
 then
     echo "[✓] Memwatch"
 else
@@ -132,7 +133,7 @@ fi
 
 # Mtrace
 mtrace --version > /dev/null 2>&1
-if [ $? -eq 0 ]
+if [[ $? -eq 0 ]]
 then
     echo "[✓] Mtrace"
 else
@@ -140,6 +141,22 @@ else
     echo "  Replicate this error with the following command:"
     echo "      mtrace --version"
     echo "  As to installing Mtrace... Mtrace is built into glibc!  How do you *not* have glibc?!"
+    EXIT_CODE=1
+fi
+
+# AddressSanitizer (ASAN)
+TEMP_ERROR=$(gcc -fsanitize=address --version 2>&1 > /dev/null)
+if [[ ! -n "$TEMP_ERROR" ]]
+then
+    echo "[✓] AddressSanitizer (ASAN)"
+else
+    echo "[ ] AddressSanitizer (ASAN) is not available"
+    echo "  Replicate this error with the following command:"
+    echo "      gcc -fsanitize=address --version"
+    echo "  Do you even have gcc installed?  Find out with the following command:"
+    echo "      gcc --version"
+    echo "  If not, install gcc with the following command:"
+    echo "      apt install gcc"
     EXIT_CODE=1
 fi
 
